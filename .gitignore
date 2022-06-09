@@ -16,10 +16,9 @@
 /build
 
 # misc
-.DS_Store
 *.pem
 Thumbs.db
-
+.DS_Store
 # debug
 npm-debug.log*
 pnpm-debug.log*
