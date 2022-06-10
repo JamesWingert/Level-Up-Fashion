@@ -8,11 +8,9 @@
     "plugin:prettier/recommended"
   ],
 
-
-
   "rules": {
     "prettier/prettier": [
-      "error",
+      "warn",
       {
         "singleQuote": true,
         "endOfLine": "auto"
