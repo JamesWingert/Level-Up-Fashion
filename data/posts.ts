@@ -30,10 +30,45 @@ export const posts = [
   {
     category: 'Jewelry',
     description: 'Not so expensive necklaces',
-    id: '2ea8cfb0-44a3-4c07-bdc2-31ffa135ea28',
+    id: '2ea8cfb0-44a3-4c07-bdc2-31rfa135ea28',
     imageUrl:
       'https://media.gq.com/photos/605dffed26f582adc9ff2d06/master/w_1600%2Cc_limit/mens-jewelry-gq-april-2021-03.jpg',
     title: 'High Quality Necklaces',
     url: 'https://gq.com',
+  },
+  {
+    category: 'Shirts',
+    description: 'More Shirts',
+    id: '2ea8cfb0-44a3-4c07-bdc2-31cfa135ea24',
+    imageUrl:
+      'https://www.differenta.com/media/produkty/98326/gap-blue-denim-men-s-shirt-denim-western_z-225678-00-A.jpg',
+    title: 'High Quality Shirts',
+    url: 'https://nike.com',
+  },
+  {
+    category: 'Shirts',
+    description: 'I really like shirts',
+    id: '2ea8cfb0-44a3-4c07-bdc2-31nfa135ea28',
+    imageUrl: 'https://m.media-amazon.com/images/I/61c88VhHHUL._AC_UX385_.jpg',
+    title: 'Amazing, more shirts.',
+    url: 'https://pinterest.com',
+  },
+  {
+    category: 'Pants',
+    description: 'Cargos are in this year',
+    id: '2ea8cfb0-44a3-4c07-bdc2-31hfa135ea28',
+    imageUrl:
+      'https://www.realmenrealstyle.com/wp-content/uploads/2021/11/cargo-pants-for-men.jpg',
+    title: 'A lot of pockets, a lot of fun.',
+    url: 'https://amazon.com',
+  },
+  {
+    category: 'Pants',
+    description: 'Pleather for good weather.',
+    id: '2ea8cfb0-44a3-4c07-bdc2-31efa135ea28',
+    imageUrl:
+      'https://cdn.shoplightspeed.com/shops/625505/files/15473327/premium-buffalo-mens-leather-pants-mp750.jpg',
+    title: 'Who loves pleather?',
+    url: 'https://shop.jaminleather.com/',
   },
 ];

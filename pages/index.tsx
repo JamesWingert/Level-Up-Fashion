@@ -32,7 +32,7 @@ function Home() {
   const { user } = useUser();
 
   const { data, loading, error, fetchMore } = useQuery(AllPostsQuery, {
-    variables: { first: 6 },
+    variables: { first: 4 },
   });
 
   if (!user) {
