@@ -57,8 +57,8 @@ const Admin = () => {
       }),
       {
         loading: 'Uploading...',
-        success: 'Image successfully uploaded!🎉',
-        error: `Upload failed 😥 Please try again ${error}`,
+        success: 'Image successfully uploaded!',
+        error: `Upload failed. Please try again ${error}`,
       }
     );
   };
@@ -71,8 +71,8 @@ const Admin = () => {
     try {
       toast.promise(createPost({ variables }), {
         loading: 'Creating new post..',
-        success: 'Post successfully created!🎉',
-        error: `Something went wrong 😥 Please try again -  ${error}`,
+        success: 'Post successfully created!',
+        error: `Something went wrong. Please try again -  ${error}`,
       });
     } catch (error) {
       console.error(error);
@@ -80,55 +80,55 @@ const Admin = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-md py-12">
+    <div className="container py-12 mx-auto max-w-md">
       <Toaster />
       <h1 className="my-5 text-3xl font-medium">Create a new post</h1>
       <form
-        className="grid grid-cols-1 gap-y-6 rounded-lg p-8 shadow-lg"
+        className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg bg-base-content"
         onSubmit={handleSubmit(onSubmit)}
       >
         <label className="block">
-          <span className="text-gray-700">Title</span>
+          <span className="text-neutral">Title</span>
           <input
             placeholder="Title"
             name="title"
             type="text"
             {...register('title', { required: true })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Description</span>
+          <span className="text-neutral">Description</span>
           <input
             placeholder="Description"
             {...register('description', { required: true })}
             name="description"
             type="text"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Url</span>
+          <span className="text-neutral">Url</span>
           <input
             placeholder="https://example.com"
             {...register('url', { required: true })}
             name="url"
             type="text"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Category</span>
+          <span className="text-neutral">Category</span>
           <input
             placeholder="Name"
             {...register('category', { required: true })}
             name="category"
             type="text"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">
+          <span className="text-neutral">
             Upload a .png or .jpg image (max 1MB).
           </span>
           <input
@@ -143,12 +143,12 @@ const Admin = () => {
         <button
           disabled={loading}
           type="submit"
-          className="my-4 rounded-md bg-blue-500 py-2 px-4 font-medium capitalize text-white hover:bg-blue-600"
+          className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
         >
           {loading ? (
-            <span className="flex items-center justify-center">
+            <span className="flex justify-center items-center">
               <svg
-                className="mr-1 h-6 w-6 animate-spin"
+                className="mr-1 w-6 h-6 animate-spin"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

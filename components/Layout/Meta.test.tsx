@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 
 import { Meta } from './Meta';
 
-// Mock `next/head`: https://bradgarropy.com/blog/mocking-nextjs
 jest.mock(
   'next/head',
   () =>

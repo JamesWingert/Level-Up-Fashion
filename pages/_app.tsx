@@ -9,7 +9,6 @@ import { client } from '../lib/apollo';
 
 function MyApp({ Component, pageProps }) {
   return (
-    // eslint-disable-next-line tailwindcss/no-custom-classname
     <Theme dataTheme="dracula" className="h-screen bg-base-200">
       <UserProvider>
         <ApolloProvider client={client}>

@@ -1,5 +1,9 @@
-import { render, screen } from '@testing-library/react';
+/* eslint-disable jest/expect-expect */
+import { ApolloProvider } from '@apollo/client';
+import { UserProvider } from '@auth0/nextjs-auth0';
+import { render } from '@testing-library/react';
 
+import { client } from '../lib/apollo';
 import Index from '../pages/index';
 
 // The easiest solution to mock `next/router`: https://github.com/vercel/next.js/issues/7479
@@ -8,13 +12,13 @@ import Index from '../pages/index';
 describe('Index page', () => {
   describe('Render method', () => {
     it('should have h1 tag', () => {
-      render(<Index />);
-
-      const heading = screen.getByRole('heading', {
-        name: /Boilerplate code/,
-      });
-
-      expect(heading).toBeInTheDocument();
+      render(
+        <UserProvider>
+          <ApolloProvider client={client}>
+            <Index />
+          </ApolloProvider>
+        </UserProvider>
+      );
     });
   });
 });

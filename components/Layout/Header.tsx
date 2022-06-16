@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable unused-imports/no-unused-vars */
 import { useUser } from '@auth0/nextjs-auth0';
 import { Popover, Transition } from '@headlessui/react';
@@ -14,39 +13,39 @@ function Header() {
   const navigation = [{ name: 'view my bookmarks', href: '/bookmarks' }];
 
   return (
-    <div className="relative border-b-2 border-base-300  bg-base-200">
+    <div className="relative border-b-2 border-base-100  bg-base-200">
       {user ? (
         <>
           <div className="relative p-3 sm:p-5 ">
             <Popover>
-              <div className="mx-auto max-w-7xl items-center px-4 sm:px-6">
+              <div className="items-center px-4 mx-auto max-w-7xl sm:px-6">
                 <nav
-                  className="relative flex items-center justify-between sm:h-10 md:justify-center"
+                  className="flex relative justify-between items-center sm:h-10 md:justify-center"
                   aria-label="Global"
                 >
                   <div className="flex flex-1 items-center md:absolute md:inset-y-0 md:left-0">
-                    <div className="flex w-full items-center justify-between md:w-auto">
+                    <div className="flex justify-between items-center w-full md:w-auto">
                       <Link href="/">
-                        <a className="hover:cursor-secondary font-Lobster text-3xl text-accent-focus">
+                        <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">
                           Level Up Fashion
                         </a>
                       </Link>
                       <div className="md:hidden">
                         <ThemeSwitcher />
                       </div>
-                      <div className="-mr-2 flex items-center md:hidden">
-                        <Popover.Button className="focus:ring-info-focus inline-flex items-center justify-center  rounded-md p-2 text-primary-focus ring-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset">
+                      <div className="flex items-center -mr-2 md:hidden">
+                        <Popover.Button className="inline-flex justify-center items-center p-2  rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-info-focus text-primary-focus ring-secondary hover:text-primary">
                           <span className="sr-only">Open main menu</span>{' '}
-                          <MenuIcon className="h-8 w-8" aria-hidden="true" />
+                          <MenuIcon className="w-8 h-8" aria-hidden="true" />
                         </Popover.Button>
                       </div>
                     </div>
                   </div>
-                  <div className="right-0 hidden items-center text-center hover:underline hover:underline-offset-2 md:inline-flex">
+                  <div className="hidden right-0 items-center text-center hover:underline hover:underline-offset-2 md:inline-flex">
                     {navigation.map((item) => (
                       <Link href={item.href} key={item.name} passHref>
-                        <a className="items-center  text-center text-2xl text-info">
-                          <span className="flex items-center text-center font-Flower">
+                        <a className="items-center  text-2xl text-center text-info">
+                          <span className="flex items-center font-Flower text-center">
                             {item.name}
                           </span>
                         </a>
@@ -54,13 +53,13 @@ function Header() {
                     ))}
                   </div>
 
-                  <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
-                    <span className="mr-6 mt-2 hidden items-center md:inline-flex">
+                  <div className="hidden md:flex md:absolute md:inset-y-0 md:right-0 md:justify-end md:items-center">
+                    <span className="hidden items-center mt-2 mr-6 md:inline-flex">
                       <ThemeSwitcher />
                     </span>
                     <span className="inline-flex rounded-md shadow">
                       <Link href="/api/auth/logout" passHref>
-                        <a className="inline-flex items-center rounded-md border border-transparent bg-primary-focus px-4 py-2 text-base font-medium text-white hover:bg-primary">
+                        <a className="inline-flex items-center py-2 px-4 text-base font-medium text-white rounded-md border border-transparent bg-primary-focus hover:bg-primary">
                           Log Out
                         </a>
                       </Link>
@@ -80,20 +79,20 @@ function Header() {
               >
                 <Popover.Panel
                   focus
-                  className="absolute inset-x-0 top-0 z-10 origin-top-right p-2 transition md:hidden"
+                  className="absolute inset-x-0 top-0 z-10 p-2 transition origin-top-right md:hidden"
                 >
-                  <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black/10 ">
-                    <div className="flex items-center justify-between px-5 pt-4">
+                  <div className="overflow-hidden bg-white rounded-lg ring-1 ring-black/10 shadow-md ">
+                    <div className="flex justify-between items-center px-5 pt-4">
                       <Link href="/" passHref>
-                        <a className="hover:cursor-secondary font-Lobster text-3xl text-accent-focus">
+                        <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">
                           Level Up Fashion
                         </a>
                       </Link>
                       <div className="-mr-2">
                         {' '}
-                        <Popover.Button className="inline-flex items-center  justify-center rounded-md bg-white p-2 text-secondary-focus outline-none hover:text-secondary focus:outline-none">
+                        <Popover.Button className="inline-flex justify-center  items-center p-2 bg-white rounded-md outline-none focus:outline-none text-secondary-focus hover:text-secondary">
                           <span className="sr-only">Close menu</span>
-                          <XIcon className="h-6 w-6" aria-hidden="true" />
+                          <XIcon className="w-6 h-6" aria-hidden="true" />
                         </Popover.Button>
                       </div>
                     </div>
@@ -101,7 +100,7 @@ function Header() {
                       {navigation.map((item) => (
                         <Link href={item.href} key={item.name} passHref>
                           <a className="font-Pacifico text-xl text-neutral-focus">
-                            <span className="mx-auto flex items-center justify-center hover:underline hover:underline-offset-2">
+                            <span className="flex justify-center items-center mx-auto hover:underline hover:underline-offset-2">
                               <BookmarkIcon className="h-6 text-neutral" />
                               {item.name}
                             </span>
@@ -110,7 +109,7 @@ function Header() {
                       ))}
                     </div>
                     <Link href="/api/auth/logout" passHref>
-                      <a className="block w-full bg-secondary-focus px-5 py-3 text-center font-medium text-white hover:bg-secondary">
+                      <a className="block py-3 px-5 w-full font-medium text-center text-white bg-secondary-focus hover:bg-secondary">
                         Log Out
                       </a>
                     </Link>
@@ -121,10 +120,10 @@ function Header() {
           </div>
         </>
       ) : (
-        <div className="mx-auto flex items-center justify-between bg-base-100 p-5">
-          <div className="  flex items-center justify-center">
+        <div className="flex justify-between items-center p-5 mx-auto bg-base-100">
+          <div className="  flex justify-center items-center">
             <Link href="/" passHref>
-              <a className="hover:cursor-secondary font-Lobster text-3xl text-accent-focus">
+              <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">
                 Level Up Fashion
               </a>
             </Link>

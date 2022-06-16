@@ -8,21 +8,18 @@ const ThemeSwitcher = () => {
     setTheme('dracula');
   }, []);
   return (
-    <div className="mx-auto items-center">
-      {/* eslint-disable-next-line tailwindcss/no-custom-classname*/}
+    <div className="items-center mx-auto">
       <label className="swap swap-rotate">
         <input className="hidden " type="checkbox" id="swap" />
         {theme === 'dracula' ? (
           <SunIcon
             onClick={() => setTheme('pastel')}
-            // eslint-disable-next-line tailwindcss/no-custom-classname
-            className="swap-off h-8  w-8 cursor-pointer"
+            className="w-8 h-8  cursor-pointer swap-off"
           />
         ) : (
           <MoonIcon
             onClick={() => setTheme('dracula')}
-            // eslint-disable-next-line tailwindcss/no-custom-classname
-            className="swap-on h-8 w-8 cursor-pointer"
+            className="w-8 h-8 cursor-pointer swap-on"
           />
         )}
       </label>

@@ -1,4 +1,3 @@
-// pages/api/upload-image.ts
 import aws from 'aws-sdk';
 
 export default async function handler(req, res) {
