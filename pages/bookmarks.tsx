@@ -18,6 +18,7 @@ const BookmarksQuery = gql`
 
 const Bookmarks = () => {
   const { data, loading, error } = useQuery(BookmarksQuery);
+
   if (error)
     return (
       <>
@@ -40,6 +41,7 @@ const Bookmarks = () => {
             ) : (
               data.bookmarks.map((post) => (
                 <div key={post}>
+                  <button> Remove bookmark</button>
                   <Card
                     href={post.id}
                     title={post.title}

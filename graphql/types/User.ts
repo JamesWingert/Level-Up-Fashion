@@ -84,3 +84,25 @@ export const BookmarkPost = extendType({
     });
   },
 });
+
+export const DeleteBookmark = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.field('deleteBookmark', {
+      type: 'Post',
+      args: {
+        id: stringArg(),
+      },
+      async resolve(_, args, ctx) {
+        const post = await ctx.prisma.post.findUnique({
+          where: { id: args.id },
+        });
+
+        await ctx.prisma.user.delete({
+          where: { id: args.id },
+        });
+        return post;
+      },
+    });
+  },
+});

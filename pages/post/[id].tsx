@@ -7,7 +7,7 @@ import prisma from '../../lib/prisma';
 
 const BookmarkPostMutation = gql`
   mutation ($id: String!) {
-    bookmarkPost(id: $id) {
+    deleteBookmark(id: $id) {
       title
       url
       imageUrl
@@ -19,11 +19,11 @@ const BookmarkPostMutation = gql`
 
 const Post = ({ post }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [createBookmark] = useMutation(BookmarkPostMutation);
+  const [deleteBookmark] = useMutation(BookmarkPostMutation);
 
   const bookmark = async () => {
     setIsLoading(true);
-    toast.promise(createBookmark({ variables: { id: post.id } }), {
+    toast.promise(deleteBookmark({ variables: { id: post.id } }), {
       loading: 'Loading..',
       success: 'Saved successfully!',
       error: `Something went wrong. Please try again`,

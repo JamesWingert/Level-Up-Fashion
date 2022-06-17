@@ -32,7 +32,7 @@ function Home() {
   const { user } = useUser();
 
   const { data, loading, error, fetchMore } = useQuery(AllPostsQuery, {
-    variables: { first: 4 },
+    variables: { first: 6 },
   });
 
   if (!user) {
@@ -80,7 +80,7 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container  py-20 px-5 mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {data?.posts.edges.map(({ node }, i) => (
             // <Link href={`/post/${node.id}`} key={i}>
             <div className="hover:cursor-pointer" key={i}>

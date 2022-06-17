@@ -1,5 +1,4 @@
 /* eslint-disable import/no-anonymous-default-export */
-//TODO
 import { ApolloServer } from 'apollo-server-micro';
 import type { PageConfig } from 'next';
 

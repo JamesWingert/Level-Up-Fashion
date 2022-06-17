@@ -5,6 +5,7 @@
 type Mutation {
   bookmarkPost(id: String): Post
   createPost(category: String!, description: String!, imageUrl: String!, title: String!, url: String!): Post!
+  deleteBookmark(id: String): Post
   deletePost(id: String!): Post!
   updatePost(category: String, description: String, id: String, imageUrl: String, title: String, url: String): Post!
 }

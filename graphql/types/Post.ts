@@ -128,7 +128,7 @@ export const UpdatePostMutation = extendType({
     });
   },
 });
-// // delete Post
+//  delete Post
 export const DeletePostMutation = extendType({
   type: 'Mutation',
   definition(t) {

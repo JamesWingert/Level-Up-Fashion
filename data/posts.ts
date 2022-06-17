@@ -67,7 +67,7 @@ export const posts = [
     description: 'Pleather for good weather.',
     id: '2ea8cfb0-44a3-4c07-bdc2-31efa135ea28',
     imageUrl:
-      'https://cdn.shoplightspeed.com/shops/625505/files/15473327/premium-buffalo-mens-leather-pants-mp750.jpg',
+      'https://images.rivithead.com/products/zoom-images/decode-leather-pants.jpg',
     title: 'Who loves pleather?',
     url: 'https://shop.jaminleather.com/',
   },
