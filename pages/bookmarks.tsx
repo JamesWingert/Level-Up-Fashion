@@ -29,7 +29,7 @@ const BookmarkDeleteMutation = gql`
   }
 `;
 
-const Bookmarks = () => {
+const Bookmarks = ({ post }) => {
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +43,7 @@ const Bookmarks = () => {
       </>
     );
 
-  const deleteBk = async ({ post }) => {
+  const deleteBk = async () => {
     setIsLoading(true);
     toast.promise(deleteBookmark({ variables: { id: post.id } }), {
       loading: 'Loading..',
@@ -65,23 +65,20 @@ const Bookmarks = () => {
                 You haven&apos;t bookmarked any posts yet 👀
               </p>
             ) : (
-              data.bookmarks.map((post) => (
-                <div key={post}>
-                  <button onClick={() => deleteBk(post)}>
-                    {' '}
-                    Remove bookmark
-                  </button>
-                  <Card
-                    href={post.id}
-                    title={post.title}
-                    description={post.description}
-                    category={post.category}
-                    imageUrl={post.imageUrl}
-                    url={post.url}
-                    id={post.id}
-                  />
-                </div>
-              ))
+              // data.bookmarks.map((post) => (
+              <div key={post}>
+                <button onClick={() => deleteBk()}> Remove bookmark</button>
+                <Card
+                  href={post.id}
+                  title={post.title}
+                  description={post.description}
+                  category={post.category}
+                  imageUrl={post.imageUrl}
+                  url={post.url}
+                  id={post.id}
+                />
+              </div>
+              // ))
             )}
           </div>
         )}
@@ -94,7 +91,7 @@ export default Bookmarks;
 
 export const getServerSideProps = async ({ params }) => {
   const id = params.id;
-  const bookmark = await prisma.user.findUnique({
+  const bookmark = await prisma.user.findMany({
     where: { id },
     select: {
       bookmarks: true,
