@@ -1,7 +1,9 @@
-import { gql, useQuery } from '@apollo/client';
-import React from 'react';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { Card } from '../components/Card';
+import prisma from '../lib/prisma';
 
 const BookmarksQuery = gql`
   query {
@@ -15,10 +17,24 @@ const BookmarksQuery = gql`
     }
   }
 `;
+const BookmarkDeleteMutation = gql`
+  mutation ($id: String!) {
+    deleteBookmark(id: $id) {
+      title
+      url
+      imageUrl
+      category
+      description
+    }
+  }
+`;
 
 const Bookmarks = () => {
-  const { data, loading, error } = useQuery(BookmarksQuery);
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  const [isLoading, setIsLoading] = useState(false);
 
+  const { data, loading, error } = useQuery(BookmarksQuery);
+  const [deleteBookmark] = useMutation(BookmarkDeleteMutation);
   if (error)
     return (
       <>
@@ -26,6 +42,16 @@ const Bookmarks = () => {
         {error.message}
       </>
     );
+
+  const deleteBk = async ({ post }) => {
+    setIsLoading(true);
+    toast.promise(deleteBookmark({ variables: { id: post.id } }), {
+      loading: 'Loading..',
+      success: 'Deleted successfully!',
+      error: `Something went wrong. Please try again`,
+    });
+    setIsLoading(false);
+  };
   return (
     <div className="bg-base-300">
       <div className="container  py-20 px-5 mx-auto max-w-7xl">
@@ -41,7 +67,10 @@ const Bookmarks = () => {
             ) : (
               data.bookmarks.map((post) => (
                 <div key={post}>
-                  <button> Remove bookmark</button>
+                  <button onClick={() => deleteBk(post)}>
+                    {' '}
+                    Remove bookmark
+                  </button>
                   <Card
                     href={post.id}
                     title={post.title}
@@ -62,3 +91,18 @@ const Bookmarks = () => {
 };
 
 export default Bookmarks;
+
+export const getServerSideProps = async ({ params }) => {
+  const id = params.id;
+  const bookmark = await prisma.user.findUnique({
+    where: { id },
+    select: {
+      bookmarks: true,
+    },
+  });
+  return {
+    props: {
+      bookmark,
+    },
+  };
+};
