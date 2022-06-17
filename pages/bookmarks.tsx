@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 import { Card } from '../components/Card';
-import prisma from '../lib/prisma';
+import { client } from '../lib/apollo';
 
 const BookmarksQuery = gql`
   query {
@@ -29,7 +29,7 @@ const BookmarkDeleteMutation = gql`
   }
 `;
 
-const Bookmarks = ({ post }) => {
+const Bookmarks = ({ bookmark }) => {
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,7 +45,7 @@ const Bookmarks = ({ post }) => {
 
   const deleteBk = async () => {
     setIsLoading(true);
-    toast.promise(deleteBookmark({ variables: { id: post.id } }), {
+    toast.promise(deleteBookmark({ variables: { id: bookmark.id } }), {
       loading: 'Loading..',
       success: 'Deleted successfully!',
       error: `Something went wrong. Please try again`,
@@ -66,16 +66,16 @@ const Bookmarks = ({ post }) => {
               </p>
             ) : (
               // data.bookmarks.map((post) => (
-              <div key={post}>
+              <div key={bookmark}>
                 <button onClick={() => deleteBk()}> Remove bookmark</button>
                 <Card
-                  href={post.id}
-                  title={post.title}
-                  description={post.description}
-                  category={post.category}
-                  imageUrl={post.imageUrl}
-                  url={post.url}
-                  id={post.id}
+                  href={bookmark.id}
+                  title={bookmark.title}
+                  description={bookmark.description}
+                  category={bookmark.category}
+                  imageUrl={bookmark.imageUrl}
+                  url={bookmark.url}
+                  id={bookmark.id}
                 />
               </div>
               // ))
@@ -90,16 +90,14 @@ const Bookmarks = ({ post }) => {
 export default Bookmarks;
 
 export const getServerSideProps = async ({ params }) => {
-  const id = params.id;
-  const bookmark = await prisma.user.findMany({
-    where: { id },
-    select: {
-      bookmarks: true,
-    },
+  const { data } = await client.query({
+    query: BookmarksQuery,
+    variables: { id: params.id },
   });
+
   return {
     props: {
-      bookmark,
+      bookmarks: data?.bookmarks,
     },
   };
 };
