@@ -94,7 +94,7 @@ const Admin = () => {
             name="title"
             type="text"
             {...register('title', { required: true })}
-            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm text-neutral-content focus:border-primary focus:ring-secondary"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
@@ -104,7 +104,7 @@ const Admin = () => {
             {...register('description', { required: true })}
             name="description"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm text-neutral-content focus:border-primary focus:ring-secondary"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
@@ -114,7 +114,7 @@ const Admin = () => {
             {...register('url', { required: true })}
             name="url"
             type="text"
-            className=" block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm text-neutral-content focus:border-primary focus:ring-secondary"
+            className=" block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
@@ -124,7 +124,7 @@ const Admin = () => {
             {...register('category', { required: true })}
             name="category"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm text-neutral-content focus:border-primary focus:ring-secondary"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
           />
         </label>
         <label className="block">
