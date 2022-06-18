@@ -10,18 +10,10 @@ export type Context = {
   prisma: PrismaClient;
 };
 export async function createContext({ req, res }): Promise<Context> {
-  const session = getSession(req, res);
-  if (session) {
-    const { user, accessToken } = getSession(req, res);
-    return {
-      user,
-      accessToken,
-      prisma,
-    };
-  }
+  const { user, accessToken } = getSession(req, res);
   return {
-    user: null,
+    user,
+    accessToken,
     prisma,
-    accessToken: null,
   };
 }
