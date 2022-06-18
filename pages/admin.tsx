@@ -1,11 +1,14 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { gql, useMutation } from '@apollo/client';
+import { getSession } from '@auth0/nextjs-auth0';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 
-const CreatePostMutation = gql`
+import prisma from '../lib/prisma';
+
+const CreateLinkMutation = gql`
   mutation (
     $title: String!
     $url: String!
@@ -13,7 +16,7 @@ const CreatePostMutation = gql`
     $category: String!
     $description: String!
   ) {
-    createPost(
+    createLink(
       title: $title
       url: $url
       imageUrl: $imageUrl
@@ -30,49 +33,23 @@ const CreatePostMutation = gql`
 `;
 
 const Admin = () => {
-  const [createPost, { data, loading, error }] =
-    useMutation(CreatePostMutation);
+  const [createLink, { data, loading, error }] =
+    useMutation(CreateLinkMutation);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const uploadPhoto = async (e) => {
-    const file = e.target.files[0];
-    const filename = encodeURIComponent(file.name);
-    const res = await fetch(`/api/upload-image?file=${filename}`);
-    const data = await res.json();
-    const formData = new FormData();
-
-    Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
-      // @ts-ignore
-      formData.append(key, value);
-    });
-
-    toast.promise(
-      fetch(data.url, {
-        method: 'POST',
-        body: formData,
-      }),
-      {
-        loading: 'Uploading...',
-        success: 'Image successfully uploaded!',
-        error: `Upload failed. Please try again ${error}`,
-      }
-    );
-  };
-
   const onSubmit = async (data) => {
-    const s3bucket = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME;
     const { title, url, category, description, image } = data;
-    const imageUrl = `https://${s3bucket}.s3.amazonaws.com/${image[0].name}`;
+    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
     const variables = { title, url, category, description, imageUrl };
     try {
-      toast.promise(createPost({ variables }), {
-        loading: 'Creating new post..',
-        success: 'Post successfully created!',
-        error: `Something went wrong. Please try again -  ${error}`,
+      toast.promise(createLink({ variables }), {
+        loading: 'Creating new link..',
+        success: 'Link successfully created!🎉',
+        error: `Something went wrong 😥 Please try again -  ${error}`,
       });
     } catch (error) {
       console.error(error);
@@ -82,68 +59,56 @@ const Admin = () => {
   return (
     <div className="container py-12 mx-auto max-w-md">
       <Toaster />
-      <h1 className="my-5 text-3xl font-medium">Create a new post</h1>
+      <h1 className="my-5 text-3xl font-medium">Create a new link</h1>
       <form
-        className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg bg-base-content"
+        className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg"
         onSubmit={handleSubmit(onSubmit)}
       >
         <label className="block">
-          <span className="text-neutral">Title</span>
+          <span className="text-gray-700">Title</span>
           <input
             placeholder="Title"
             name="title"
             type="text"
             {...register('title', { required: true })}
-            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-neutral">Description</span>
+          <span className="text-gray-700">Description</span>
           <input
             placeholder="Description"
             {...register('description', { required: true })}
             name="description"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-neutral">Url</span>
+          <span className="text-gray-700">Url</span>
           <input
             placeholder="https://example.com"
             {...register('url', { required: true })}
             name="url"
             type="text"
-            className=" block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-neutral">Category</span>
+          <span className="text-gray-700">Category</span>
           <input
             placeholder="Name"
             {...register('category', { required: true })}
             name="category"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:ring shadow-sm  focus:border-primary focus:ring-secondary"
-          />
-        </label>
-        <label className="block">
-          <span className="text-neutral">
-            Upload a .png or .jpg image (max 1MB).
-          </span>
-          <input
-            {...register('image', { required: true })}
-            onChange={uploadPhoto}
-            type="file"
-            accept="image/png, image/jpeg"
-            name="image"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
 
         <button
           disabled={loading}
           type="submit"
-          className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
+          className="py-2 px-4 my-4 font-medium text-white capitalize bg-blue-500 hover:bg-blue-600 rounded-md"
         >
           {loading ? (
             <span className="flex justify-center items-center">
@@ -158,7 +123,7 @@ const Admin = () => {
               Creating...
             </span>
           ) : (
-            <span>Create Post</span>
+            <span>Create Link</span>
           )}
         </button>
       </form>
@@ -167,3 +132,41 @@ const Admin = () => {
 };
 
 export default Admin;
+
+export const getServerSideProps = async ({ req, res }) => {
+  const session = getSession(req, res);
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/api/auth/login',
+      },
+      props: {},
+    };
+  }
+
+  const user = await prisma.user.findUnique({
+    select: {
+      email: true,
+      role: true,
+    },
+    where: {
+      email: session.user.email,
+    },
+  });
+
+  // if (user.role !== 'ADMIN') {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: '/404',
+  //     },
+  //     props: {},
+  //   };
+  // }
+
+  return {
+    props: {},
+  };
+};
