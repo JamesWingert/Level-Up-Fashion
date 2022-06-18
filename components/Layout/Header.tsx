@@ -1,7 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { useUser } from '@auth0/nextjs-auth0';
 import { Popover, Transition } from '@headlessui/react';
-import { BookmarkIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 import React from 'react';
 import { Fragment } from 'react';
@@ -10,7 +10,10 @@ import ThemeSwitcher from '../ThemeSwitcher';
 
 function Header() {
   const { user } = useUser();
-  const navigation = [{ name: 'view my bookmarks', href: '/bookmarks' }];
+  const navigation = [
+    { name: 'my bookmarks', href: '/bookmarks' },
+    { name: 'add post', href: '/admin' },
+  ];
 
   return (
     <div className="relative border-b-2 border-base-100  bg-base-200">
@@ -41,13 +44,11 @@ function Header() {
                       </div>
                     </div>
                   </div>
-                  <div className="hidden right-0 items-center text-center hover:underline hover:underline-offset-2 md:inline-flex">
+                  <div className="hidden md:flex md:relative md:space-x-10">
                     {navigation.map((item) => (
                       <Link href={item.href} key={item.name} passHref>
-                        <a className="items-center  text-2xl text-center text-info">
-                          <span className="flex items-center font-Flower text-center">
-                            {item.name}
-                          </span>
+                        <a className="flex font-Flower text-2xl hover:underline hover:underline-offset-2 text-info">
+                          {item.name}
                         </a>
                       </Link>
                     ))}
@@ -101,7 +102,6 @@ function Header() {
                         <Link href={item.href} key={item.name} passHref>
                           <a className="font-Pacifico text-xl text-neutral-focus">
                             <span className="flex justify-center items-center mx-auto hover:underline hover:underline-offset-2">
-                              <BookmarkIcon className="h-6 text-neutral" />
                               {item.name}
                             </span>
                           </a>

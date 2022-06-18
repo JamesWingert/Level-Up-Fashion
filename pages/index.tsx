@@ -46,10 +46,9 @@ function Home() {
               </span>{' '}
             </h1>
             <p className="mx-auto mt-3 max-w-md  text-base sm:text-lg md:mt-5 md:max-w-3xl md:text-xl">
-              Level Up Fashion is a blog where we share fashion links, ideas,
-              and pictures. We focus on sharing posts that we believe will
-              interest people working in tech, but obviously everyone is
-              welcome!
+              Level Up Fashion is a community where people in the tech industry
+              can come to share their favorite fashion. We hope you enjoy your
+              time here and can pick up some new favorite fashion trends!
             </p>
             <div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
               <div className="rounded-md shadow">

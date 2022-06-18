@@ -80,7 +80,8 @@ export const CreatePostMutation = extendType({
             email: ctx.user.email,
           },
         });
-        if (!user || user.role !== 'ADMIN') {
+        // || user.role !== 'ADMIN'
+        if (!user) {
           throw new Error(`You do not have permission to perform action`);
         }
         const newPost = {

@@ -1,9 +1,9 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { Card } from '../components/Card';
-import { client } from '../lib/apollo';
 
 const BookmarksQuery = gql`
   query {
@@ -29,12 +29,14 @@ const BookmarkDeleteMutation = gql`
   }
 `;
 
-const Bookmarks = ({ bookmark }) => {
+const Bookmarks = () => {
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
-
   const { data, loading, error } = useQuery(BookmarksQuery);
+
   const [deleteBookmark] = useMutation(BookmarkDeleteMutation);
+  const router = useRouter();
+
   if (error)
     return (
       <>
@@ -43,15 +45,6 @@ const Bookmarks = ({ bookmark }) => {
       </>
     );
 
-  const deleteBk = async () => {
-    setIsLoading(true);
-    toast.promise(deleteBookmark({ variables: { id: bookmark.id } }), {
-      loading: 'Loading..',
-      success: 'Deleted successfully!',
-      error: `Something went wrong. Please try again`,
-    });
-    setIsLoading(false);
-  };
   return (
     <div className="bg-base-300">
       <div className="container  py-20 px-5 mx-auto max-w-7xl">
@@ -65,20 +58,38 @@ const Bookmarks = ({ bookmark }) => {
                 You haven&apos;t bookmarked any posts yet 👀
               </p>
             ) : (
-              // data.bookmarks.map((post) => (
-              <div key={bookmark}>
-                <button onClick={() => deleteBk()}> Remove bookmark</button>
-                <Card
-                  href={bookmark.id}
-                  title={bookmark.title}
-                  description={bookmark.description}
-                  category={bookmark.category}
-                  imageUrl={bookmark.imageUrl}
-                  url={bookmark.url}
-                  id={bookmark.id}
-                />
-              </div>
-              // ))
+              data.bookmarks.map((post) => (
+                <div key={post.id}>
+                  <Toaster />
+                  <button
+                    className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
+                    onClick={async () => {
+                      setIsLoading(true);
+                      await toast.promise(
+                        deleteBookmark({ variables: { id: post.id } }),
+                        {
+                          loading: 'Loading..',
+                          success: 'Deleted successfully!',
+                          error: `Something went wrong. Please try again`,
+                        }
+                      );
+                      router.reload();
+                      setIsLoading(false);
+                    }}
+                  >
+                    Remove bookmark
+                  </button>
+                  <Card
+                    href={post.id}
+                    title={post.title}
+                    description={post.description}
+                    category={post.category}
+                    imageUrl={post.imageUrl}
+                    url={post.url}
+                    id={post.id}
+                  />
+                </div>
+              ))
             )}
           </div>
         )}
@@ -88,16 +99,3 @@ const Bookmarks = ({ bookmark }) => {
 };
 
 export default Bookmarks;
-
-export const getServerSideProps = async ({ params }) => {
-  const { data } = await client.query({
-    query: BookmarksQuery,
-    variables: { id: params.id },
-  });
-
-  return {
-    props: {
-      bookmarks: data?.bookmarks,
-    },
-  };
-};

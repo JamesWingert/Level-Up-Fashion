@@ -98,10 +98,19 @@ export const DeleteBookmark = extendType({
           where: { id: args.id },
         });
 
-        await ctx.prisma.user.delete({
-          where: { id: args.id },
+        await ctx.prisma.user.update({
+          where: {
+            email: ctx.user.email,
+          },
+          data: {
+            bookmarks: {
+              disconnect: {
+                id: post.id,
+              },
+            },
+          },
         });
-        return post;
+        return null;
       },
     });
   },

@@ -10,16 +10,16 @@ export const Card = ({
   id,
 }) => {
   return (
-    <ul role="list" className="">
+    <ul role="list" className="hover:scale-105">
       <li
         key={id}
         className="flex flex-col col-span-1 text-center bg-white rounded-lg divide-y divide-gray-200 shadow"
       >
         <div className="flex-col flex-1">
           <Link href={`/post/${href}`} passHref>
-            <a className="hover:opacity-60">
+            <a>
               <img
-                className="shrink-0 mx-auto w-80  h-80 rounded-t-lg"
+                className="shrink-0 mx-auto w-full  h-96 rounded-t-lg"
                 src={imageUrl}
                 alt=""
               />
@@ -44,7 +44,7 @@ export const Card = ({
             <div className="flex flex-1 w-0">
               <a
                 href={url}
-                className="inline-flex relative z-50 flex-1 justify-center items-center py-4 -mr-px w-0 text-sm font-medium rounded-bl-lg border border-transparent text-primary-focus hover:text-primary"
+                className="inline-flex relative z-50 flex-1 justify-center items-center py-4 -mr-px w-0 text-sm font-medium hover:underline hover:underline-offset-2 rounded-bl-lg border border-transparent text-primary-focus"
               >
                 {/* removes https from url */}
                 {url.replace(/(^\w+:|^)\/\//, '')}
