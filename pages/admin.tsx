@@ -65,50 +65,50 @@ const Admin = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <label className="block">
-          <span className="text-gray-700">Title</span>
+          <span className="text-base-content">Title</span>
           <input
             placeholder="Title"
             name="title"
             type="text"
             {...register('title', { required: true })}
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Description</span>
+          <span className="text-base-content">Description</span>
           <input
             placeholder="Description"
             {...register('description', { required: true })}
             name="description"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Url</span>
+          <span className="text-base-content">Url</span>
           <input
             placeholder="https://example.com"
             {...register('url', { required: true })}
             name="url"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Category</span>
+          <span className="text-base-content">Category</span>
           <input
             placeholder="Name"
             {...register('category', { required: true })}
             name="category"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
 
         <button
           disabled={loading}
           type="submit"
-          className="py-2 px-4 my-4 font-medium text-white capitalize bg-blue-500 hover:bg-blue-600 rounded-md"
+          className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
         >
           {loading ? (
             <span className="flex justify-center items-center">
