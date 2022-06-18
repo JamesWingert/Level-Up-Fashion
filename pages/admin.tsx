@@ -8,7 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import prisma from '../lib/prisma';
 
-const CreateLinkMutation = gql`
+const CreatePostMutation = gql`
   mutation (
     $title: String!
     $url: String!
@@ -16,7 +16,7 @@ const CreateLinkMutation = gql`
     $category: String!
     $description: String!
   ) {
-    createLink(
+    createPost(
       title: $title
       url: $url
       imageUrl: $imageUrl
@@ -33,8 +33,8 @@ const CreateLinkMutation = gql`
 `;
 
 const Admin = () => {
-  const [createLink, { data, loading, error }] =
-    useMutation(CreateLinkMutation);
+  const [createPost, { data, loading, error }] =
+    useMutation(CreatePostMutation);
   const {
     register,
     handleSubmit,
@@ -46,9 +46,9 @@ const Admin = () => {
     const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
     const variables = { title, url, category, description, imageUrl };
     try {
-      toast.promise(createLink({ variables }), {
-        loading: 'Creating new link..',
-        success: 'Link successfully created!🎉',
+      toast.promise(createPost({ variables }), {
+        loading: 'Creating new post..',
+        success: 'Post successfully created!🎉',
         error: `Something went wrong 😥 Please try again -  ${error}`,
       });
     } catch (error) {
@@ -59,7 +59,7 @@ const Admin = () => {
   return (
     <div className="container py-12 mx-auto max-w-md">
       <Toaster />
-      <h1 className="my-5 text-3xl font-medium">Create a new link</h1>
+      <h1 className="my-5 text-3xl font-medium">Create a new post</h1>
       <form
         className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg"
         onSubmit={handleSubmit(onSubmit)}
@@ -123,7 +123,7 @@ const Admin = () => {
               Creating...
             </span>
           ) : (
-            <span>Create Link</span>
+            <span>Create Post</span>
           )}
         </button>
       </form>
