@@ -48,8 +48,8 @@ const Admin = () => {
     try {
       toast.promise(createPost({ variables }), {
         loading: 'Creating new post..',
-        success: 'Post successfully created!🎉',
-        error: `Something went wrong 😥 Please try again -  ${error}`,
+        success: 'Post successfully created!',
+        error: `Something went wrong. Please try again -  ${error}`,
       });
     } catch (error) {
       console.error(error);
@@ -107,6 +107,7 @@ const Admin = () => {
 
         <button
           disabled={loading}
+          onClick={handleSubmit(onSubmit)}
           type="submit"
           className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
         >
