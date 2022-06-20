@@ -128,7 +128,18 @@ const Admin = () => {
             className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
-
+        <label className="block">
+          <span className="text-gray-700">
+            Upload a .png or .jpg image (max 1MB).
+          </span>
+          <input
+            {...register('image', { required: true })}
+            onChange={uploadPhoto}
+            type="file"
+            accept="image/png, image/jpeg"
+            name="image"
+          />
+        </label>
         <button
           disabled={loading}
           type="submit"
