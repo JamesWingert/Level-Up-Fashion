@@ -40,6 +40,30 @@ const Admin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const uploadPhoto = async (e) => {
+    const file = e.target.files[0];
+    const filename = encodeURIComponent(file.name);
+    const res = await fetch(`/api/upload-image?file=${filename}`);
+    const data = await res.json();
+    const formData = new FormData();
+
+    Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
+      // @ts-ignore
+      formData.append(key, value);
+    });
+
+    toast.promise(
+      fetch(data.url, {
+        method: 'POST',
+        body: formData,
+      }),
+      {
+        loading: 'Uploading...',
+        success: 'Image successfully uploaded!',
+        error: `Upload failed. Please try again ${error}`,
+      }
+    );
+  };
 
   const onSubmit = async (data) => {
     const { title, url, category, description, image } = data;
@@ -107,7 +131,6 @@ const Admin = () => {
 
         <button
           disabled={loading}
-          onClick={handleSubmit(onSubmit)}
           type="submit"
           className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
         >
@@ -150,7 +173,6 @@ export const getServerSideProps = async ({ req, res }) => {
   const user = await prisma.user.findUnique({
     select: {
       email: true,
-      role: true,
     },
     where: {
       email: session.user.email,
