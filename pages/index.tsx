@@ -35,7 +35,7 @@ function Home() {
     variables: { first: 6 },
   });
 
-  if (!user || !user.accessToken) {
+  if (!user) {
     return (
       <div className="container mx-auto">
         <main className=" px-4 mx-auto mt-16 max-w-7xl sm:mt-24">

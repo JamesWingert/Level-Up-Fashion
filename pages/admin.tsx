@@ -1,12 +1,9 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { gql, useMutation } from '@apollo/client';
-import { getSession } from '@auth0/nextjs-auth0';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
-
-import prisma from '../lib/prisma';
 
 const CreatePostMutation = gql`
   mutation (
@@ -154,31 +151,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-export const getServerSideProps = async ({ req, res }) => {
-  const session = getSession(req, res);
-
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/api/auth/login',
-      },
-      props: {},
-    };
-  }
-
-  const user = await prisma.user.findUnique({
-    select: {
-      email: true,
-      role: true,
-    },
-    where: {
-      email: session.user.email,
-    },
-  });
-
-  return {
-    props: {},
-  };
-};
