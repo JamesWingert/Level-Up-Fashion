@@ -1,10 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
-import { getSession, useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0';
 import Head from 'next/head';
 import Link from 'next/link';
 
 import { Card } from '../components/Card';
-import prisma from '../lib/prisma';
 
 const AllPostsQuery = gql`
   query allPostsQuery($first: Int, $after: String) {
@@ -119,29 +118,3 @@ function Home() {
 }
 
 export default Home;
-export const getServerSideProps = async ({ req, res }) => {
-  const session = getSession(req, res);
-
-  if (session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/',
-      },
-      props: {},
-    };
-  }
-
-  const user = await prisma.user.findUnique({
-    select: {
-      email: true,
-    },
-    where: {
-      email: session.user.email,
-    },
-  });
-
-  return {
-    props: { user },
-  };
-};
