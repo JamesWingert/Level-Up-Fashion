@@ -1,5 +1,6 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { ApolloServer } from 'apollo-server-micro';
+import type { MicroRequest } from 'apollo-server-micro/dist/types';
+import type { ServerResponse } from 'http';
 import type { PageConfig } from 'next';
 
 import { createContext } from '../../graphql/context';
@@ -12,18 +13,13 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
-export default async (req, res) => {
-  const allowedOrigins = [
-    'https://studio.apollographql.com',
-    'https://graphiql-online.com/',
-    'http://localhost:3000',
-  ];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+// eslint-disable-next-line import/no-anonymous-default-export
+export default async (req: MicroRequest, res: ServerResponse) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://studio.apollographql.com'
+  );
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -39,7 +35,7 @@ export default async (req, res) => {
   })(req, res);
 };
 
-// Apollo Server Micro takes care of body parsing
+//  Apollo Server Micro takes care of body parsing
 export const config: PageConfig = {
   api: {
     bodyParser: false,

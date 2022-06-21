@@ -1,11 +1,12 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { gql, useMutation } from '@apollo/client';
+import { getSession } from '@auth0/nextjs-auth0';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 
-const CreatePostMutation = gql`
+const CreateLinkMutation = gql`
   mutation (
     $title: String!
     $url: String!
@@ -13,7 +14,7 @@ const CreatePostMutation = gql`
     $category: String!
     $description: String!
   ) {
-    createPost(
+    createLink(
       title: $title
       url: $url
       imageUrl: $imageUrl
@@ -30,46 +31,28 @@ const CreatePostMutation = gql`
 `;
 
 const Admin = () => {
-  const [createPost, { data, loading, error }] =
-    useMutation(CreatePostMutation);
+  const [createLink, { data, loading, error }] =
+    useMutation(CreateLinkMutation);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const uploadPhoto = async (e: { target: { files: any[] } }) => {
-    const file = e.target.files[0];
-    // const filename = encodeURIComponent(file.name);
-    // const res = await fetch(`/api/upload-image?file=${filename}`);
-    // const data = await res.json();
-    const formData = new FormData();
 
-    Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
-      // @ts-ignore
-      formData.append(key, value);
-    });
-
-    toast.promise(
-      fetch(data.url, {
-        method: 'POST',
-        body: formData,
-      }),
-      {
-        loading: 'Uploading...',
-        success: 'Image successfully uploaded!🎉',
-        error: `Upload failed 😥 Please try again ${error}`,
-      }
-    );
-  };
-
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: {
+    title: any;
+    url: any;
+    category: any;
+    description: any;
+    image: any;
+  }) => {
     const { title, url, category, description, image } = data;
     const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
     const variables = { title, url, category, description, imageUrl };
     try {
-      toast.promise(createPost({ variables }), {
-        loading: 'Creating new post..',
-        success: 'Post successfully created!🎉',
+      toast.promise(createLink({ variables }), {
+        loading: 'Creating new link..',
+        success: 'Link successfully created!🎉',
         error: `Something went wrong 😥 Please try again -  ${error}`,
       });
     } catch (error) {
@@ -80,7 +63,7 @@ const Admin = () => {
   return (
     <div className="container py-12 mx-auto max-w-md">
       <Toaster />
-      <h1 className="my-5 text-3xl font-medium">Create a new post</h1>
+      <h1 className="my-5 text-3xl font-medium">Create a new link</h1>
       <form
         className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg"
         onSubmit={handleSubmit(onSubmit)}
@@ -125,19 +108,6 @@ const Admin = () => {
             className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
-        <label className="block">
-          <span className="text-gray-700">
-            Upload a .png or .jpg image (max 1MB).
-          </span>
-          <input
-            {...register('image', { required: true })}
-            //@ts-ignore
-            onChange={uploadPhoto}
-            type="file"
-            accept="image/png, image/jpeg"
-            name="image"
-          />
-        </label>
 
         <button
           disabled={loading}
@@ -157,7 +127,7 @@ const Admin = () => {
               Creating...
             </span>
           ) : (
-            <span>Create Post</span>
+            <span>Create Link</span>
           )}
         </button>
       </form>
@@ -166,3 +136,41 @@ const Admin = () => {
 };
 
 export default Admin;
+
+export const getServerSideProps = async ({ req, res }) => {
+  const session = getSession(req, res);
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/api/auth/login',
+      },
+      props: {},
+    };
+  }
+
+  // const user = await prisma.user.findUnique({
+  //   select: {
+  //     email: true,
+  //     role: true,
+  //   },
+  //   where: {
+  //     email: session.user.email,
+  //   },
+  // });
+
+  // if (user.role !== 'ADMIN') {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: '/404',
+  //     },
+  //     props: {},
+  //   };
+  // }
+
+  return {
+    props: {},
+  };
+};

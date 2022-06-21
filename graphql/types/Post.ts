@@ -75,15 +75,15 @@ export const CreatePostMutation = extendType({
         description: nonNull(stringArg()),
       },
       async resolve(_parent, args, ctx) {
-        const user = await ctx.prisma.user.findUnique({
-          where: {
-            email: ctx.user.email,
-          },
-        });
+        // const user = await ctx.prisma.user.findUnique({
+        //   where: {
+        //     email: ctx.user.email,
+        //   },
+        // });
         // || user.role !== 'ADMIN'
-        if (!user) {
-          throw new Error(`You do not have permission to perform action`);
-        }
+        // if (!user) {
+        //   throw new Error(`You do not have permission to perform action`);
+        // }
         const newPost = {
           title: args.title,
           url: args.url,
@@ -91,8 +91,8 @@ export const CreatePostMutation = extendType({
           category: args.category,
           description: args.description,
         };
-        // TODO change back to await ctx.prisma.post.create({
-        return ctx.prisma.post.create({
+        // eslint-disable-next-line @typescript-eslint/return-await
+        return await ctx.prisma.post.create({
           data: newPost,
         });
       },
