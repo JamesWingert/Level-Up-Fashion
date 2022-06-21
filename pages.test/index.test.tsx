@@ -15,7 +15,7 @@ describe('Index page', () => {
       render(
         <UserProvider>
           <ApolloProvider client={client}>
-            <Index user={undefined} />
+            <Index />
           </ApolloProvider>
         </UserProvider>
       );

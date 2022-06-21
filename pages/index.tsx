@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { getSession } from '@auth0/nextjs-auth0';
+import { getSession, useUser } from '@auth0/nextjs-auth0';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -29,14 +29,14 @@ const AllPostsQuery = gql`
   }
 `;
 
-function Home({ user }) {
-  // const { user } = useUser();
+function Home() {
+  const { user } = useUser();
 
   const { data, loading, error, fetchMore } = useQuery(AllPostsQuery, {
     variables: { first: 6 },
   });
 
-  if (!user) {
+  if (!user || !user.accessToken) {
     return (
       <div className="container mx-auto">
         <main className=" px-4 mx-auto mt-16 max-w-7xl sm:mt-24">
