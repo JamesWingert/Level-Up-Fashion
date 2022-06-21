@@ -39,13 +39,7 @@ const Admin = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: {
-    title: any;
-    url: any;
-    category: any;
-    description: any;
-    image: any;
-  }) => {
+  const onSubmit = async (data) => {
     const { title, url, category, description, image } = data;
     const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
     const variables = { title, url, category, description, imageUrl };

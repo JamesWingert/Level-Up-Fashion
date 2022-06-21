@@ -12,7 +12,7 @@ function Header() {
   const { user } = useUser();
   const navigation = [
     { name: 'my bookmarks', href: '/bookmarks' },
-    { name: 'add post', href: '/admin' },
+    { name: 'add post', href: '/post' },
   ];
 
   return (
