@@ -49,17 +49,11 @@ const Admin = () => {
       // @ts-ignore
       formData.append(key, value);
     });
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    };
 
     toast.promise(
       fetch(data.url, {
         method: 'POST',
         body: formData,
-        headers: headers,
       }),
       {
         loading: 'Uploading...',
