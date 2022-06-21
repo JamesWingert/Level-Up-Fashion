@@ -38,11 +38,33 @@ const Admin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const uploadPhoto = async (e) => {
+    const file = e.target.files[0];
+    const filename = encodeURIComponent(file.name);
+    const res = await fetch(`/api/upload-image?file=${filename}`);
+    const data = await res.json();
+    const formData = new FormData();
 
+    Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
+      // @ts-ignore
+      formData.append(key, value);
+    });
+
+    toast.promise(
+      fetch(data.url, {
+        method: 'POST',
+        body: formData,
+      }),
+      {
+        loading: 'Uploading...',
+        success: 'Image successfully uploaded!',
+        error: `Upload failed. Please try again ${error}`,
+      }
+    );
+  };
   const onSubmit = async (data) => {
     const { title, url, category, description, image } = data;
-    console.log(data, image, image.name);
-    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image}`;
+    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
     const variables = { title, url, category, description, imageUrl };
     try {
       toast.promise(createPost({ variables }), {
@@ -103,7 +125,18 @@ const Admin = () => {
             className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
-
+        <label className="block">
+          <span className="text-gray-700">
+            Upload a .png or .jpg image (max 1MB).
+          </span>
+          <input
+            {...register('image', { required: true })}
+            onChange={uploadPhoto}
+            type="file"
+            accept="image/png, image/jpeg"
+            name="image"
+          />
+        </label>
         <button
           disabled={loading}
           type="submit"
