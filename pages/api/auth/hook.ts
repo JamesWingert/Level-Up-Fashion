@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(403).json({ message: 'Method not allowed' });
   }
   if (secret !== process.env.AUTH0_HOOK_SECRET) {
-    return res.status(403).json({ message: `You must provide the secret 🤫` });
+    return res.status(403).json({ message: `You must provide the secret ` });
   }
   if (email) {
     await prisma.user.create({
