@@ -6,8 +6,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 
-import prisma from '../lib/prisma';
-
 const CreatePostMutation = gql`
   mutation (
     $title: String!
@@ -73,7 +71,7 @@ const Admin = () => {
       <h1 className="my-5 text-3xl font-medium">Create a new post</h1>
       <form
         className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
       >
         <label className="block">
           <span className="text-base-content">Title</span>
@@ -167,25 +165,6 @@ export const getServerSideProps = async ({ req, res }) => {
       props: {},
     };
   }
-
-  const user = await prisma.user.findUnique({
-    select: {
-      email: true,
-    },
-    where: {
-      email: session.user.email,
-    },
-  });
-
-  // if (user.role !== 'ADMIN') {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: '/404',
-  //     },
-  //     props: {},
-  //   };
-  // }
 
   return {
     props: {},
