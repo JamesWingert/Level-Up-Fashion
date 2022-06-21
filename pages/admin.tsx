@@ -37,18 +37,31 @@ const Admin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const uploadPhoto = async (e) => {
+  const uploadPhoto = async (e: { target: { files: any[] } }) => {
     const file = e.target.files[0];
-    const filename = encodeURIComponent(file.name);
-    const res = await fetch(`/api/upload-image?file=${filename}`);
-    const data = await res.json();
+    // const filename = encodeURIComponent(file.name);
+    // const res = await fetch(`/api/upload-image?file=${filename}`);
+    // const data = await res.json();
     const formData = new FormData();
 
     Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
       // @ts-ignore
       formData.append(key, value);
     });
+
+    toast.promise(
+      fetch(data.url, {
+        method: 'POST',
+        body: formData,
+      }),
+      {
+        loading: 'Uploading...',
+        success: 'Image successfully uploaded!🎉',
+        error: `Upload failed 😥 Please try again ${error}`,
+      }
+    );
   };
+
   const onSubmit = async (data) => {
     const { title, url, category, description, image } = data;
     const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
@@ -56,8 +69,8 @@ const Admin = () => {
     try {
       toast.promise(createPost({ variables }), {
         loading: 'Creating new post..',
-        success: 'Post successfully created!',
-        error: `Something went wrong. Please try again -  ${error}`,
+        success: 'Post successfully created!🎉',
+        error: `Something went wrong 😥 Please try again -  ${error}`,
       });
     } catch (error) {
       console.error(error);
@@ -73,43 +86,43 @@ const Admin = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <label className="block">
-          <span className="text-base-content">Title</span>
+          <span className="text-gray-700">Title</span>
           <input
             placeholder="Title"
             name="title"
             type="text"
             {...register('title', { required: true })}
-            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-base-content">Description</span>
+          <span className="text-gray-700">Description</span>
           <input
             placeholder="Description"
             {...register('description', { required: true })}
             name="description"
             type="text"
-            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-base-content">Url</span>
+          <span className="text-gray-700">Url</span>
           <input
             placeholder="https://example.com"
             {...register('url', { required: true })}
             name="url"
             type="text"
-            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
-          <span className="text-base-content">Category</span>
+          <span className="text-gray-700">Category</span>
           <input
             placeholder="Name"
             {...register('category', { required: true })}
             name="category"
             type="text"
-            className="block mt-1 w-full text-black rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
           />
         </label>
         <label className="block">
@@ -118,16 +131,18 @@ const Admin = () => {
           </span>
           <input
             {...register('image', { required: true })}
+            //@ts-ignore
             onChange={uploadPhoto}
             type="file"
             accept="image/png, image/jpeg"
             name="image"
           />
         </label>
+
         <button
           disabled={loading}
           type="submit"
-          className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
+          className="py-2 px-4 my-4 font-medium text-white capitalize bg-blue-500 hover:bg-blue-600 rounded-md"
         >
           {loading ? (
             <span className="flex justify-center items-center">
