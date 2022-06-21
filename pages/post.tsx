@@ -41,7 +41,8 @@ const Admin = () => {
 
   const onSubmit = async (data) => {
     const { title, url, category, description, image } = data;
-    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image.name}`;
+    console.log(data, image, image.name);
+    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image}`;
     const variables = { title, url, category, description, imageUrl };
     try {
       toast.promise(createPost({ variables }), {
