@@ -69,8 +69,8 @@ const Admin = () => {
     try {
       toast.promise(createPost({ variables }), {
         loading: 'Creating new post..',
-        success: 'Post successfully created!🎉',
-        error: `Something went wrong 😥 Please try again -  ${error}`,
+        success: 'Post successfully created!',
+        error: `Something went wrong. Please try again -  ${error}`,
       });
     } catch (error) {
       console.error(error);
@@ -92,7 +92,7 @@ const Admin = () => {
             name="title"
             type="text"
             {...register('title', { required: true })}
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral"
           />
         </label>
         <label className="block">
@@ -102,7 +102,7 @@ const Admin = () => {
             {...register('description', { required: true })}
             name="description"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral"
           />
         </label>
         <label className="block">
@@ -112,7 +112,7 @@ const Admin = () => {
             {...register('url', { required: true })}
             name="url"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral"
           />
         </label>
         <label className="block">
@@ -122,7 +122,7 @@ const Admin = () => {
             {...register('category', { required: true })}
             name="category"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral"
           />
         </label>
         <label className="block">

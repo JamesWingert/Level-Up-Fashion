@@ -2,14 +2,13 @@ import { MoonIcon, SunIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useTheme } from 'react-daisyui';
 
-import useHasMounted from './ClientHook';
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
-  const hasMounted = useHasMounted();
-  if (!hasMounted) {
-    return null;
-  }
+  // const hasMounted = useHasMounted();
+  // if (!hasMounted) {
+  //   return null;
+  // }
   // useEffect(() => {
   //   setTheme('dracula');
   // }, []);

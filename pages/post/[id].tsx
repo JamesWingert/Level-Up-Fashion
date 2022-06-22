@@ -49,7 +49,7 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div className="container mx-auto h-screen">
+    <div className="container mx-auto h-screen bg-base-200">
       <div className="flex justify-center">
         <div className="flex-col justify-center space-y-6 text-center">
           <h1 className="text-3xl">{post.title}</h1>
