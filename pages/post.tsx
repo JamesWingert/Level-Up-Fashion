@@ -74,7 +74,7 @@ const Admin = () => {
         error: `Something went wrong. Please try again -  ${error}`,
       });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
