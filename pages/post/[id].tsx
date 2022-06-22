@@ -48,8 +48,6 @@ const Post = async ({ post, user }) => {
     router.reload();
     setIsLoading(false);
   };
-  console.log(post);
-  console.log(user);
 
   return (
     <div className="container mx-auto">

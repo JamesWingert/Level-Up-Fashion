@@ -44,8 +44,7 @@ const Bookmarks = () => {
         {error.message}
       </>
     );
-  console.log(data.bookmarks);
-  console.log(data);
+
   return (
     <div className="bg-base-300">
       <div className="container  py-20 px-5 mx-auto max-w-7xl">
