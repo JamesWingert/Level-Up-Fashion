@@ -1,5 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -35,7 +35,7 @@ const Post = ({ post }) => {
   const [createBookmark] = useMutation(BookmarkPostMutation);
   const [deleteBookmark] = useMutation(BookmarkDeleteMutation);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const bookmark = async () => {
     setIsLoading(true);
@@ -44,7 +44,7 @@ const Post = ({ post }) => {
       success: 'Saved successfully!',
       error: `Something went wrong. Please try again`,
     });
-    router.reload();
+    //router.reload();
     setIsLoading(false);
   };
 
@@ -104,7 +104,7 @@ const Post = ({ post }) => {
                       error: `Something went wrong. Please try again`,
                     }
                   );
-                  router.reload();
+                  //router.reload();
                   setIsLoading(false);
                 }}
               >
