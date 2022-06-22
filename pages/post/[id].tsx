@@ -48,7 +48,8 @@ const Post = async ({ post, user }) => {
     router.reload();
     setIsLoading(false);
   };
-
+  console.log(post);
+  console.log(user);
   return (
     <div className="container mx-auto">
       <div className="flex justify-center">
@@ -69,7 +70,7 @@ const Post = async ({ post, user }) => {
           </a>
           <div>
             <Toaster />
-            {post.users.email != user.email ? (
+            {post?.users?.email != user?.email ? (
               <>
                 <button
                   onClick={() => bookmark()}
@@ -137,15 +138,6 @@ export const getServerSideProps = async ({ params, req, res }) => {
       users: true,
     },
   });
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/api/auth/login',
-      },
-      props: {},
-    };
-  }
 
   const user = await prisma.user.findUnique({
     select: {
