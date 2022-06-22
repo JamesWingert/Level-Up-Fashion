@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import { getSession } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -30,7 +31,7 @@ const BookmarkDeleteMutation = gql`
   }
 `;
 
-const Post = ({ post }) => {
+const Post = async ({ post, user }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [createBookmark] = useMutation(BookmarkPostMutation);
   const [deleteBookmark] = useMutation(BookmarkDeleteMutation);
@@ -48,6 +49,7 @@ const Post = ({ post }) => {
     setIsLoading(false);
   };
   console.log(post);
+  console.log(user);
   return (
     <div className="container mx-auto">
       <div className="flex justify-center">
@@ -68,7 +70,7 @@ const Post = ({ post }) => {
 
           <div>
             <Toaster />
-            {post.users.id != 0 ? (
+            {post.users.email != user.email ? (
               <>
                 <button
                   onClick={() => bookmark()}
@@ -120,8 +122,10 @@ const Post = ({ post }) => {
 
 export default Post;
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params, req, res }) => {
   const id = params.id;
+  const session = getSession(req, res);
+
   const post = await prisma.post.findUnique({
     where: { id },
     select: {
@@ -134,9 +138,39 @@ export const getServerSideProps = async ({ params }) => {
       users: true,
     },
   });
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/api/auth/login',
+      },
+      props: {},
+    };
+  }
+
+  const user = await prisma.user.findUnique({
+    select: {
+      email: true,
+    },
+    where: {
+      email: session.user.email,
+    },
+  });
+
+  // if (user.role !== 'ADMIN') {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: '/404',
+  //     },
+  //     props: {},
+  //   };
+  // }
+
   return {
     props: {
       post,
+      user,
     },
   };
 };
