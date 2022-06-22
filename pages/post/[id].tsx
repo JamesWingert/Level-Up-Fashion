@@ -50,14 +50,16 @@ const Post = async ({ post, user }) => {
   };
   console.log(post);
   console.log(user);
+
   return (
     <div className="container mx-auto">
       <div className="flex justify-center">
         <div className="flex-col justify-center space-y-6 text-center">
           <h1 className="text-3xl">{post.title}</h1>
+
           <img
             src={post.imageUrl}
-            className="max-w-5xl max-h-[60vh] rounded-lg shadow-lg"
+            className="flex-1 mx-auto max-w-5xl max-h-[60vh] rounded-lg shadow-lg"
             alt=""
           />
           <p className="pb-6 text-base">{post.description}</p>
@@ -67,7 +69,6 @@ const Post = async ({ post, user }) => {
           >
             {post.url}
           </a>
-
           <div>
             <Toaster />
             {post.users.email != user.email ? (
