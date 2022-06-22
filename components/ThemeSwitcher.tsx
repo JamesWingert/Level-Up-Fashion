@@ -1,12 +1,12 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTheme } from 'react-daisyui';
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    setTheme('dracula');
-  }, []);
+  // useEffect(() => {
+  //   setTheme('dracula');
+  // }, []);
   return (
     <div className="items-center mx-auto">
       <label className="swap swap-rotate">

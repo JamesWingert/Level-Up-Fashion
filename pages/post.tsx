@@ -86,47 +86,47 @@ const Admin = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <label className="block">
-          <span className="text-gray-700">Title</span>
+          <span className="text-neutral-content">Title</span>
           <input
             placeholder="Title"
             name="title"
             type="text"
             {...register('title', { required: true })}
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Description</span>
+          <span className="text-neutral-content">Description</span>
           <input
             placeholder="Description"
             {...register('description', { required: true })}
             name="description"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Url</span>
+          <span className="text-neutral-content">Url</span>
           <input
             placeholder="https://example.com"
             {...register('url', { required: true })}
             name="url"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Category</span>
+          <span className="text-neutral-content">Category</span>
           <input
             placeholder="Name"
             {...register('category', { required: true })}
             name="category"
             type="text"
-            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm"
+            className="block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 shadow-sm text-neutral-content"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">
+          <span className="text-neutral-content">
             Upload a .png or .jpg image (max 1MB).
           </span>
           <input
