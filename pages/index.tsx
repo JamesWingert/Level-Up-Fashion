@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -118,3 +118,4 @@ function Home() {
 }
 
 export default Home;
+export const getServerSideProps = withPageAuthRequired();
