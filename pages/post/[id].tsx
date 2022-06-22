@@ -68,7 +68,7 @@ const Post = ({ post }) => {
 
           <div>
             <Toaster />
-            {post.users.length === 0 ? (
+            {post.users.id != 0 ? (
               <>
                 <button
                   onClick={() => bookmark()}

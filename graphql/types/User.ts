@@ -47,7 +47,7 @@ export const Userbookmarks = extendType({
             bookmarks: true,
           },
         });
-        if (!user) throw new Error('Invalid user');
+        if (!user) throw new console.error();
         return user.bookmarks;
       },
     });
