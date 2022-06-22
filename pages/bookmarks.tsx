@@ -1,10 +1,9 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { Card } from '../components/Card';
-import useHasMounted from '../components/ClientHook';
 
 const BookmarksQuery = gql`
   query {
@@ -36,11 +35,11 @@ const Bookmarks = () => {
   const { data, loading, error } = useQuery(BookmarksQuery);
 
   const [deleteBookmark] = useMutation(BookmarkDeleteMutation);
-  // const router = useRouter();
-  const hasMounted = useHasMounted();
-  if (!hasMounted) {
-    return null;
-  }
+  const router = useRouter();
+  // const hasMounted = useHasMounted();
+  // if (!hasMounted) {
+  //   return null;
+  // }
   if (error)
     return (
       <>
@@ -77,7 +76,7 @@ const Bookmarks = () => {
                           error: `Something went wrong. Please try again`,
                         }
                       );
-                      // router.reload();
+                      router.reload();
                       setIsLoading(false);
                     }}
                   >
