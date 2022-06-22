@@ -9,7 +9,8 @@ import { client } from '../lib/apollo';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Theme dataTheme="dracula" className="h-screen bg-base-200">
+    // dataTheme="dracula"
+    <Theme className="h-screen bg-base-200">
       <UserProvider>
         <ApolloProvider client={client}>
           <Layout>
