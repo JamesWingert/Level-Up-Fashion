@@ -36,10 +36,7 @@ const Bookmarks = () => {
 
   const [deleteBookmark] = useMutation(BookmarkDeleteMutation);
   const router = useRouter();
-  // const hasMounted = useHasMounted();
-  // if (!hasMounted) {
-  //   return null;
-  // }
+
   if (error)
     return (
       <>

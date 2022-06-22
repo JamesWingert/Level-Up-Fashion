@@ -5,10 +5,6 @@ import { useTheme } from 'react-daisyui';
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
-  // const hasMounted = useHasMounted();
-  // if (!hasMounted) {
-  //   return null;
-  // }
   // useEffect(() => {
   //   setTheme('dracula');
   // }, []);

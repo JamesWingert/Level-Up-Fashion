@@ -38,6 +38,7 @@ const Admin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const uploadPhoto = async (e) => {
     const file = e.target.files[0];
     const filename = encodeURIComponent(file.name);

@@ -47,7 +47,7 @@ const Post = ({ post }) => {
     router.reload();
     setIsLoading(false);
   };
-
+  console.log(post);
   return (
     <div className="container mx-auto">
       <div className="flex justify-center">
