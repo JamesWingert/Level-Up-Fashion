@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import { Card } from '../components/Card';
-import useHasMounted from '../components/ClientHook';
 
 const AllPostsQuery = gql`
   query allPostsQuery($first: Int, $after: String) {
@@ -35,10 +34,7 @@ function Home() {
   const { data, loading, error, fetchMore } = useQuery(AllPostsQuery, {
     variables: { first: 6 },
   });
-  const hasMounted = useHasMounted();
-  if (!hasMounted) {
-    return null;
-  }
+
   if (!user) {
     return (
       <div className="container mx-auto">
