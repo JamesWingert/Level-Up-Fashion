@@ -1,7 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { gql, useMutation } from '@apollo/client';
-import { getSession } from '@auth0/nextjs-auth0';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
@@ -30,7 +29,7 @@ const CreatePostMutation = gql`
   }
 `;
 
-const Admin = () => {
+const Post = () => {
   const [createPost, { data, loading, error }] =
     useMutation(CreatePostMutation);
   const {
@@ -74,14 +73,16 @@ const Admin = () => {
         error: `Something went wrong. Please try again -  ${error}`,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   return (
     <div className="container py-12 mx-auto max-w-md">
       <Toaster />
-      <h1 className="my-5 text-3xl font-medium">Create a new post</h1>
+      <h1 className="my-5 text-3xl font-medium text-center">
+        Create a new post
+      </h1>
       <form
         className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg"
         onSubmit={handleSubmit(onSubmit)}
@@ -164,42 +165,42 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Post;
 
-export const getServerSideProps = async ({ req, res }) => {
-  const session = getSession(req, res);
+// export const getServerSideProps = async ({ req, res }) => {
+//   const session = getSession(req, res);
 
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/api/auth/login',
-      },
-      props: {},
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: '/api/auth/login',
+//       },
+//       props: {},
+//     };
+//   }
 
-  // const user = await prisma.user.findUnique({
-  //   select: {
-  //     email: true,
-  //     role: true,
-  //   },
-  //   where: {
-  //     email: session.user.email,
-  //   },
-  // });
+// const user = await prisma.user.findUnique({
+//   select: {
+//     email: true,
+//     role: true,
+//   },
+//   where: {
+//     email: session.user.email,
+//   },
+// });
 
-  // if (user.role !== 'ADMIN') {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: '/404',
-  //     },
-  //     props: {},
-  //   };
-  // }
+// if (user.role !== 'ADMIN') {
+//   return {
+//     redirect: {
+//       permanent: false,
+//       destination: '/404',
+//     },
+//     props: {},
+//   };
+// }
 
-  return {
-    props: {},
-  };
-};
+//   return {
+//     props: {},
+//   };
+// };

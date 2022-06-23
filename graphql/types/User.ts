@@ -15,8 +15,7 @@ export const User = objectType({
     t.list.field('bookmarks', {
       type: Post,
       async resolve(_parent, _args, ctx) {
-        // eslint-disable-next-line @typescript-eslint/return-await
-        return await ctx.prisma.user
+        return ctx.prisma.user
           .findUnique({
             where: {
               id: _parent.id,
@@ -47,7 +46,7 @@ export const Userbookmarks = extendType({
             bookmarks: true,
           },
         });
-        if (!user) throw new console.error();
+        if (!user) throw new console.error('User not found');
         return user.bookmarks;
       },
     });

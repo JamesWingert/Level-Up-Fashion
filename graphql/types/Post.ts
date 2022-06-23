@@ -91,8 +91,7 @@ export const CreatePostMutation = extendType({
           category: args.category,
           description: args.description,
         };
-        // eslint-disable-next-line @typescript-eslint/return-await
-        return await ctx.prisma.post.create({
+        return ctx.prisma.post.create({
           data: newPost,
         });
       },

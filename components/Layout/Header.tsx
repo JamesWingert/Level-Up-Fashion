@@ -82,7 +82,7 @@ function Header() {
                   focus
                   className="absolute inset-x-0 top-0 z-10 p-2 transition origin-top-right md:hidden"
                 >
-                  <div className="overflow-hidden bg-white rounded-lg ring-1 ring-black/10 shadow-md ">
+                  <div className="overflow-hidden rounded-lg ring-1 ring-black/10 shadow-md bg-base-content ">
                     <div className="flex justify-between items-center px-5 pt-4">
                       <Link href="/" passHref>
                         <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">
@@ -91,7 +91,7 @@ function Header() {
                       </Link>
                       <div className="-mr-2">
                         {' '}
-                        <Popover.Button className="inline-flex justify-center  items-center p-2 bg-white rounded-md outline-none focus:outline-none text-secondary-focus hover:text-secondary">
+                        <Popover.Button className="inline-flex justify-center  items-center p-2 rounded-md outline-none focus:outline-none text-secondary-focus hover:text-secondary">
                           <span className="sr-only">Close menu</span>
                           <XIcon className="w-6 h-6" aria-hidden="true" />
                         </Popover.Button>
@@ -120,7 +120,7 @@ function Header() {
           </div>
         </>
       ) : (
-        <div className="flex justify-between items-center p-5 mx-auto bg-base-100">
+        <div className="flex justify-between items-center p-5 mx-auto h-screen">
           <div className="  flex justify-center items-center">
             <Link href="/" passHref>
               <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">

@@ -2,14 +2,15 @@ import '../styles/globals.css';
 
 import { ApolloProvider } from '@apollo/client';
 import { UserProvider } from '@auth0/nextjs-auth0';
-import { Theme } from 'react-daisyui';
 
 import Layout from '../components/Layout';
+import { ThemeProvider } from '../context/ThemeContext';
 import { client } from '../lib/apollo';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Theme dataTheme="dracula" className="h-screen bg-base-200">
+    // <Theme className="h-screen bg-base-200">
+    <ThemeProvider>
       <UserProvider>
         <ApolloProvider client={client}>
           <Layout>
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }) {
           </Layout>
         </ApolloProvider>
       </UserProvider>
-    </Theme>
+    </ThemeProvider>
   );
 }
 

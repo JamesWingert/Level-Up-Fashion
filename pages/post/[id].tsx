@@ -31,7 +31,7 @@ const BookmarkDeleteMutation = gql`
   }
 `;
 
-const Post = async ({ post, user }) => {
+const Post = ({ post, user }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [createBookmark] = useMutation(BookmarkPostMutation);
   const [deleteBookmark] = useMutation(BookmarkDeleteMutation);
@@ -48,17 +48,20 @@ const Post = async ({ post, user }) => {
     router.reload();
     setIsLoading(false);
   };
-  console.log(post);
-  console.log(user);
+
+  const isBookmarked = user.bookmarks.find((obj) => {
+    return obj.id === post.id;
+  });
+
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto h-screen">
       <div className="flex justify-center">
         <div className="flex-col justify-center space-y-6 text-center">
           <h1 className="text-3xl">{post.title}</h1>
 
           <img
             src={post.imageUrl}
-            className="flex-1 mx-auto max-w-5xl max-h-[60vh] rounded-lg shadow-lg"
+            className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
             alt=""
           />
           <p className="pb-6 text-base">{post.description}</p>
@@ -68,9 +71,11 @@ const Post = async ({ post, user }) => {
           >
             {post.url}
           </a>
+
           <div>
             <Toaster />
-            {post?.users?.email != user?.email ? (
+
+            {!isBookmarked ? (
               <>
                 <button
                   onClick={() => bookmark()}
@@ -125,7 +130,6 @@ export default Post;
 export const getServerSideProps = async ({ params, req, res }) => {
   const id = params.id;
   const session = getSession(req, res);
-
   const post = await prisma.post.findUnique({
     where: { id },
     select: {
@@ -138,26 +142,16 @@ export const getServerSideProps = async ({ params, req, res }) => {
       users: true,
     },
   });
-
   const user = await prisma.user.findUnique({
     select: {
       email: true,
+      bookmarks: true,
+      id: true,
     },
     where: {
       email: session.user.email,
     },
   });
-
-  // if (user.role !== 'ADMIN') {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: '/404',
-  //     },
-  //     props: {},
-  //   };
-  // }
-
   return {
     props: {
       post,
