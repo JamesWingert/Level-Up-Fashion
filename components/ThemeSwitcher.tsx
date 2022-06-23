@@ -14,20 +14,20 @@ const ThemeSwitcherButton = ({ ...rest }) => {
     >
       <div className="items-center mx-auto">
         <label className="swap swap-rotate">
-          <input className="hidden " type="checkbox" id="swap" />
+          <input
+            className="hidden "
+            type="checkbox"
+            id="swap"
+            onClick={toggleTheme}
+            {...rest}
+          />
           {themeMode === 'pastel' ? (
             <MoonIcon
-              onClick={toggleTheme}
-              {...rest}
-              className="w-8 h-8 cursor-pointer swap-on
+              className="w-8 h-8 cursor-pointer swap-off
           "
             />
           ) : (
-            <SunIcon
-              onClick={toggleTheme}
-              {...rest}
-              className="w-8 h-8 cursor-pointer swap-off"
-            />
+            <SunIcon className="w-8 h-8 cursor-pointer swap-on" />
           )}
         </label>
       </div>
