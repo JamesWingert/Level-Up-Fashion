@@ -23,11 +23,11 @@ const ThemeSwitcherButton = ({ ...rest }) => {
           />
           {themeMode === 'pastel' ? (
             <MoonIcon
-              className="w-8 h-8 cursor-pointer swap-off
+              className="w-8 h-8 cursor-pointer swap-on
           "
             />
           ) : (
-            <SunIcon className="w-8 h-8 cursor-pointer swap-on" />
+            <SunIcon className="w-8 h-8 cursor-pointer swap-off" />
           )}
         </label>
       </div>

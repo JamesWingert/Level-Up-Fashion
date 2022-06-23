@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { getSession } from '@auth0/nextjs-auth0';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -57,20 +58,64 @@ const Post = ({ post, user }) => {
     <div className="container mx-auto h-screen">
       <div className="flex justify-center">
         <div className="flex-col justify-center space-y-6 text-center">
-          <h1 className="text-3xl">{post.title}</h1>
-
-          <img
-            src={post.imageUrl}
-            className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
-            alt=""
-          />
-          <p className="pb-6 text-base">{post.description}</p>
-          <a
-            className="text-base text-primary-focus hover:text-primary"
-            href={`${post.url}`}
-          >
-            {post.url}
-          </a>
+          <ul role="list" className="hover:scale-105">
+            <li
+              key={post.id}
+              className="flex flex-col col-span-1 text-center bg-white rounded-lg divide-y divide-gray-200 shadow"
+            >
+              <div className="flex-col flex-1">
+                <Link href={`/post/${post.href}`} passHref>
+                  <a>
+                    <img
+                      className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
+                      src={post.imageUrl}
+                      alt=""
+                    />
+                    <h3 className="mt-6 text-sm font-medium text-gray-900">
+                      {post.title}
+                    </h3>
+                    <dl className="flex flex-col grow justify-between mt-1">
+                      <dt className="sr-only">Description</dt>
+                      <dd className="text-sm text-gray-500">
+                        {post.description}
+                      </dd>
+                      <dt className="sr-only">Role</dt>
+                      <dd className="my-3">
+                        <span className="py-1 px-2 text-xs font-medium text-green-800 bg-green-100 rounded-full">
+                          {post.category}
+                        </span>
+                      </dd>
+                    </dl>
+                  </a>
+                </Link>
+              </div>
+              <div>
+                <div className="flex -mt-px divide-x divide-gray-200">
+                  <div className="flex flex-1 w-0">
+                    <a
+                      href={post.url}
+                      className="inline-flex relative z-50 flex-1 justify-center items-center py-4 -mr-px w-0 text-sm font-medium hover:underline hover:underline-offset-2 rounded-bl-lg border border-transparent text-primary-focus"
+                    >
+                      {/* removes https from url */}
+                      {post.url.replace(/(^\w+:|^)\/\//, '')}
+                      <span className="ml-3">
+                        {' '}
+                        <svg
+                          className="w-6 h-6"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                          <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
 
           <div>
             <Toaster />
