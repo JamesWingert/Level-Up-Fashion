@@ -55,12 +55,12 @@ const Post = ({ post, user }) => {
 
   return (
     <div className="container mx-auto h-screen">
+      <img
+        className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
+        src={post.imageUrl}
+        alt=""
+      />
       <div className="flex justify-center">
-        <img
-          className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
-          src={post.imageUrl}
-          alt=""
-        />
         <div className="flex-col justify-center space-y-6 text-center">
           <ul role="list">
             <li
