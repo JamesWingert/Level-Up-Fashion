@@ -19,14 +19,14 @@ const ThemeSwitcherButton = ({ ...rest }) => {
             <MoonIcon
               onClick={toggleTheme}
               {...rest}
-              className="w-8 h-8 cursor-pointer swap-off
+              className="w-8 h-8 cursor-pointer swap-on
           "
             />
           ) : (
             <SunIcon
               onClick={toggleTheme}
               {...rest}
-              className="w-8 h-8 cursor-pointer swap-on"
+              className="w-8 h-8 cursor-pointer swap-off"
             />
           )}
         </label>
