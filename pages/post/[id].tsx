@@ -65,7 +65,7 @@ const Post = ({ post, user }) => {
           <ul role="list">
             <li
               key={post.id}
-              className="flex flex-col col-span-1 text-center bg-white rounded-lg divide-y divide-gray-200 shadow"
+              className="flex flex-col col-span-1 p-6 text-center bg-white rounded-lg divide-y divide-gray-200 shadow"
             >
               <div className="flex-col flex-1">
                 <h3 className="mt-6 text-sm font-medium text-gray-900">
