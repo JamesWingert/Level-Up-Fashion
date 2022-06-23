@@ -1,6 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
 import { getSession } from '@auth0/nextjs-auth0';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -58,36 +57,30 @@ const Post = ({ post, user }) => {
     <div className="container mx-auto h-screen">
       <div className="flex justify-center">
         <div className="flex-col justify-center space-y-6 text-center">
-          <ul role="list" className="hover:scale-105">
+          <ul role="list">
+            <img
+              className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
+              src={post.imageUrl}
+              alt=""
+            />
             <li
               key={post.id}
               className="flex flex-col col-span-1 text-center bg-white rounded-lg divide-y divide-gray-200 shadow"
             >
               <div className="flex-col flex-1">
-                <Link href={`/post/${post.href}`} passHref>
-                  <a>
-                    <img
-                      className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
-                      src={post.imageUrl}
-                      alt=""
-                    />
-                    <h3 className="mt-6 text-sm font-medium text-gray-900">
-                      {post.title}
-                    </h3>
-                    <dl className="flex flex-col grow justify-between mt-1">
-                      <dt className="sr-only">Description</dt>
-                      <dd className="text-sm text-gray-500">
-                        {post.description}
-                      </dd>
-                      <dt className="sr-only">Role</dt>
-                      <dd className="my-3">
-                        <span className="py-1 px-2 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                          {post.category}
-                        </span>
-                      </dd>
-                    </dl>
-                  </a>
-                </Link>
+                <h3 className="mt-6 text-sm font-medium text-gray-900">
+                  {post.title}
+                </h3>
+                <dl className="flex flex-col grow justify-between mt-1">
+                  <dt className="sr-only">Description</dt>
+                  <dd className="text-sm text-gray-500">{post.description}</dd>
+                  <dt className="sr-only">Role</dt>
+                  <dd className="my-3">
+                    <span className="py-1 px-2 text-xs font-medium text-green-800 bg-green-100 rounded-full">
+                      {post.category}
+                    </span>
+                  </dd>
+                </dl>
               </div>
               <div>
                 <div className="flex -mt-px divide-x divide-gray-200">
