@@ -46,7 +46,7 @@ export const Userbookmarks = extendType({
             bookmarks: true,
           },
         });
-        if (!user) throw new console.error('User not found');
+        if (!user) console.error('User not found');
         return user.bookmarks;
       },
     });

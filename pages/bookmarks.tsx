@@ -46,54 +46,52 @@ const Bookmarks = () => {
     );
 
   return (
-    <div className="h-screen">
-      <div className="container  py-20 px-5 mx-auto max-w-7xl">
-        <h1 className="my-5 text-3xl font-medium text-center">My Bookmarks</h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className=" grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {data.bookmarks.length === 0 ? (
-              <p className="text-2xl font-medium">
-                You haven&apos;t bookmarked any posts yet.
-              </p>
-            ) : (
-              data.bookmarks.map((post) => (
-                <div key={post.id}>
-                  <Toaster />
-                  <button
-                    className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
-                    onClick={async () => {
-                      setIsLoading(true);
-                      await toast.promise(
-                        deleteBookmark({ variables: { id: post.id } }),
-                        {
-                          loading: 'Loading..',
-                          success: 'Deleted successfully!',
-                          error: `Something went wrong. Please try again`,
-                        }
-                      );
-                      router.reload();
-                      setIsLoading(false);
-                    }}
-                  >
-                    Remove bookmark
-                  </button>
-                  <Card
-                    href={post.id}
-                    title={post.title}
-                    description={post.description}
-                    category={post.category}
-                    imageUrl={post.imageUrl}
-                    url={post.url}
-                    id={post.id}
-                  />
-                </div>
-              ))
-            )}
-          </div>
-        )}
-      </div>
+    <div className="container py-20  px-5 mx-auto max-w-7xl h-screen">
+      <h1 className="my-5 text-3xl font-medium text-center">My Bookmarks</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className=" grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {data.bookmarks.length === 0 ? (
+            <p className="text-2xl font-medium">
+              You haven&apos;t bookmarked any posts yet.
+            </p>
+          ) : (
+            data.bookmarks.map((post) => (
+              <div key={post.id}>
+                <Toaster />
+                <button
+                  className="py-2 px-4 my-4 font-medium text-white capitalize rounded-md bg-primary-focus hover:bg-primary"
+                  onClick={async () => {
+                    setIsLoading(true);
+                    await toast.promise(
+                      deleteBookmark({ variables: { id: post.id } }),
+                      {
+                        loading: 'Loading..',
+                        success: 'Deleted successfully!',
+                        error: `Something went wrong. Please try again`,
+                      }
+                    );
+                    router.reload();
+                    setIsLoading(false);
+                  }}
+                >
+                  Remove bookmark
+                </button>
+                <Card
+                  href={post.id}
+                  title={post.title}
+                  description={post.description}
+                  category={post.category}
+                  imageUrl={post.imageUrl}
+                  url={post.url}
+                  id={post.id}
+                />
+              </div>
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 };
