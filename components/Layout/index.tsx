@@ -4,9 +4,9 @@ import Header from './Header';
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="container mx-auto">
       <Header />
-      <div className="container mx-auto h-screen bg-base-100">{children}</div>
+      <div className="h-screen bg-base-100">{children}</div>
     </div>
   );
 };

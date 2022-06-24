@@ -25,11 +25,11 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   const toggleTheme = () => {
     switch (themeMode) {
-      case 'pastel':
-        setThemeMode('dracula');
-        break;
       case 'dracula':
         setThemeMode('pastel');
+        break;
+      case 'pastel':
+        setThemeMode('dracula');
         break;
       default:
     }
@@ -37,7 +37,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={{ themeMode, toggleTheme }}>
-      <Theme dataTheme={themeMode === 'pastel' ? 'pastel' : 'dracula'}>
+      <Theme dataTheme={themeMode === 'dracula' ? 'dracula' : 'pastel'}>
         {children}
       </Theme>
     </ThemeContext.Provider>
