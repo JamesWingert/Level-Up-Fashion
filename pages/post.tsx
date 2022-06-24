@@ -78,7 +78,8 @@ const Post = () => {
   };
 
   return (
-    <div className="container py-12 mx-auto max-w-md">
+    // container mx-auto
+    <div className=" py-12  max-w-md">
       <Toaster />
       <h1 className="my-5 text-3xl font-medium text-center">
         Create a new post

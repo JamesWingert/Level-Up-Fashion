@@ -46,18 +46,19 @@ const Bookmarks = () => {
     );
 
   return (
-    <div className="container py-20  px-5 mx-auto max-w-7xl h-screen">
+    // container mx-auto h-screen
+    <div className=" py-20  px-5 max-w-7xl">
       <h1 className="my-5 text-3xl font-medium text-center">My Bookmarks</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div className=" grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {data.bookmarks.length === 0 ? (
+          {data.bookmarks?.length === 0 ? (
             <p className="text-2xl font-medium">
               You haven&apos;t bookmarked any posts yet.
             </p>
           ) : (
-            data.bookmarks.map((post) => (
+            data.bookmarks?.map((post) => (
               <div key={post.id}>
                 <Toaster />
                 <button

@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Header />
-      {children}
+      <div className="container mx-auto h-screen bg-base-100">{children}</div>
     </div>
   );
 };
