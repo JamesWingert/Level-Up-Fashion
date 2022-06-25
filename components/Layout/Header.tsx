@@ -16,10 +16,10 @@ function Header() {
   ];
 
   return (
-    <div className="relative border-b-2 border-base-100  bg-base-200">
+    <div className="relative p-3 rounded-sm  border-b-2 sm:p-5  border-base-100 bg-base-300">
       {user ? (
         <>
-          <div className="relative p-3 sm:p-5 ">
+          <div className="relative">
             <Popover>
               <div className="items-center px-4 mx-auto max-w-7xl sm:px-6">
                 <nav
