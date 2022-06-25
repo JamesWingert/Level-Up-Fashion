@@ -46,8 +46,7 @@ const Bookmarks = () => {
     );
 
   return (
-    // container mx-auto h-screen
-    <div className="py-20 px-5 max-w-7xl h-screen">
+    <div className="container py-20 px-5 mx-auto  max-w-7xl h-screen">
       <h1 className="my-5 text-3xl font-medium text-center">My Bookmarks</h1>
       {loading ? (
         <p>Loading...</p>

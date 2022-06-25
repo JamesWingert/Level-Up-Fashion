@@ -54,8 +54,7 @@ const Post = ({ post, user }) => {
   });
 
   return (
-    // container mx-auto
-    <div className="h-screen">
+    <div className="container  mx-auto h-screen">
       <img
         className="mx-auto rounded-lg shadow-lg md:max-w-5xl md:max-h-[60vh]"
         src={post.imageUrl}

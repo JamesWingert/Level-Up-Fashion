@@ -78,7 +78,7 @@ const Post = () => {
   };
 
   return (
-    <div className="py-12 max-w-md h-screen  max-h-fit">
+    <div className="container py-12 mx-auto  max-w-md h-screen  max-h-fit">
       <Toaster />
       <h1 className="my-5 text-3xl font-medium text-center">
         Create a new post
