@@ -82,7 +82,7 @@ function Header() {
                   focus
                   className="absolute inset-x-0 top-0 z-10 p-2 transition origin-top-right md:hidden"
                 >
-                  <div className="overflow-hidden rounded-lg ring-1 ring-black/10 shadow-md bg-base-content ">
+                  <div className="overflow-hidden rounded-lg ring-1 ring-black/10 shadow-md">
                     <div className="flex justify-between items-center px-5 pt-4">
                       <Link href="/" passHref>
                         <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">
