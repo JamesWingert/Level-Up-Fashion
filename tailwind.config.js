@@ -32,7 +32,7 @@ module.exports = {
           // primary: '#334257',
           // warning: '#548CA8',
           // 'base-100': '#ffffff',
-          // 'base-300': '#e8e8e4',
+          'base-300': '#f8f9fa',
           // neutral: '#222831',
           // info: '#dc6972',
           // success: '#538e65',
