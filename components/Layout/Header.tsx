@@ -16,7 +16,7 @@ function Header() {
   ];
 
   return (
-    <div className=" relative p-3 mx-auto rounded-sm  border-b-2 sm:p-5  border-neutral-content bg-base-300">
+    <div className=" relative p-3 mx-auto rounded-sm  sm:p-5 border-b-1  border-neutral-content bg-base-300">
       {user ? (
         <>
           <div className="relative">

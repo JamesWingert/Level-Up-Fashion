@@ -31,7 +31,7 @@ module.exports = {
           // info: '#79C0FF',
           // primary: '#334257',
           // warning: '#548CA8',
-          'base-100': '#f6fff8',
+          'base-100': '#ffffff',
           'base-300': '#fbfefb',
           // neutral: '#222831',
           // info: '#dc6972',
