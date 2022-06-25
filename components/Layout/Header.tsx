@@ -120,7 +120,7 @@ function Header() {
           </div>
         </>
       ) : (
-        <div className="flex justify-center items-center mx-auto">
+        <div className="flex justify-center items-center mx-auto space-x-6">
           <div className="flex justify-center items-center">
             <Link href="/" passHref>
               <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">

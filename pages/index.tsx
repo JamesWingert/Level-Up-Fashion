@@ -37,33 +37,35 @@ function Home() {
 
   if (!user) {
     return (
-      // h-screen
-      <main className=" container px-4 mx-auto mt-16 max-w-7xl h-screen max-h-fit sm:mt-24 bg-base-100">
-        <div className="p-5 text-center rounded-2xl ring-2 ring-inset ring-white bg-base-300">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-            <span className="block font-Pacifico xl:inline text-info">
-              Welcome!
-            </span>{' '}
-          </h1>
-          <p className="mx-auto mt-3 max-w-md  text-base sm:text-lg md:mt-5 md:max-w-3xl md:text-xl">
-            Level Up Fashion is a community where people in the tech industry
-            can come to share their favorite fashion. We hope you enjoy your
-            time here and can pick up some new favorite fashion trends!
-          </p>
-          <div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
-            <div className="rounded-md shadow">
-              <Link href="/api/auth/login" passHref>
-                <a
-                  className="flex
+      <div className=" container mx-auto h-screen bg-base-100">
+        {' '}
+        <main className="px-4 mt-16 max-w-7xl sm:mt-24">
+          <div className="p-5 text-center rounded-2xl ring-2 ring-inset ring-white bg-base-300">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+              <span className="block font-Pacifico xl:inline text-info">
+                Welcome!
+              </span>{' '}
+            </h1>
+            <p className="mx-auto mt-3 max-w-md  text-base sm:text-lg md:mt-5 md:max-w-3xl md:text-xl">
+              Level Up Fashion is a community where people in the tech industry
+              can come to share their favorite fashion. We hope you enjoy your
+              time here and can pick up some new favorite fashion trends!
+            </p>
+            <div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
+              <div className="rounded-md shadow">
+                <Link href="/api/auth/login" passHref>
+                  <a
+                    className="flex
                   justify-center items-center py-3 px-8 w-full text-base font-medium text-white rounded-md border border-transparent md:py-4 md:px-10 md:text-lg bg-secondary-focus hover:bg-secondary"
-                >
-                  Login or sign up!
-                </a>
-              </Link>
+                  >
+                    Login or sign up!
+                  </a>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     );
   }
   if (loading) return <p>Loading...</p>;
