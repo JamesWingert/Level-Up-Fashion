@@ -26,17 +26,6 @@ module.exports = {
     styled: true,
     themes: [
       {
-        dracula: {
-          ...require('daisyui/src/colors/themes')['[data-theme=dracula]'],
-          // neutral: '#eeeeee',
-          // ,
-          // success: '#7BC284',
-          // secondary: '#79C0FF',
-          // primary: '#f6f8fa',
-          // 'neutral-content': '#dc6972',
-          // 'base-200': '#242424',
-          // 'base-300': '#161c22',
-        },
         pastel: {
           ...require('daisyui/src/colors/themes')['[data-theme=pastel]'],
           // info: '#79C0FF',
@@ -48,6 +37,17 @@ module.exports = {
           // info: '#dc6972',
           // success: '#538e65',
           // 'neutral-content': '#dc6972',
+        },
+        dracula: {
+          ...require('daisyui/src/colors/themes')['[data-theme=dracula]'],
+          // neutral: '#eeeeee',
+          // ,
+          // success: '#7BC284',
+          // secondary: '#79C0FF',
+          // primary: '#f6f8fa',
+          // 'neutral-content': '#dc6972',
+          // 'base-200': '#242424',
+          // 'base-300': '#161c22',
         },
       },
     ],
