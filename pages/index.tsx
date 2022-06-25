@@ -38,8 +38,8 @@ function Home() {
   if (!user) {
     return (
       <div className="container mx-auto h-screen bg-base-100">
-        <main className="px-4 mt-16 max-w-7xl sm:mt-24">
-          <div className="p-5 text-center rounded-2xl ring-2 ring-inset ring-white bg-base-300">
+        <main className=" px-4 pt-16 max-w-7xl sm:pt-24">
+          <div className="p-5 text-center rounded-2xl ring-2 ring-neutral-content bg-base-300">
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
               <span className="block font-Pacifico xl:inline text-info">
                 Welcome!
