@@ -16,7 +16,7 @@ function Header() {
   ];
 
   return (
-    <div className="relative p-3 rounded-sm  border-b-2 sm:p-5  border-base-100 bg-base-300">
+    <div className=" relative p-3 mx-auto rounded-sm  border-b-2 sm:p-5  border-base-100 bg-base-300">
       {user ? (
         <>
           <div className="relative">
@@ -120,7 +120,7 @@ function Header() {
           </div>
         </>
       ) : (
-        <div className="flex justify-between items-center mx-auto">
+        <div className="flex justify-center items-center mx-auto">
           <div className="flex justify-center items-center">
             <Link href="/" passHref>
               <a className="font-Lobster text-3xl hover:cursor-secondary text-accent-focus">
