@@ -32,7 +32,7 @@ function Home() {
   const { user } = useUser();
 
   const { data, loading, error, fetchMore } = useQuery(AllPostsQuery, {
-    variables: { first: 6 },
+    variables: { first: 3 },
   });
 
   if (!user) {
@@ -73,12 +73,12 @@ function Home() {
   const { endCursor, hasNextPage } = data?.posts.pageInfo;
 
   return (
-    <div className="h-full bg-base-100">
+    <div className="container mx-auto h-auto bg-base-100">
       <Head>
         <title>Level Up Fashion</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container  px-5 mx-auto max-w-7xl">
+      <div className="py-20 px-5 max-w-7xl h-full">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {data?.posts.edges.map(({ node }, i) => (
             // <Link href={`/post/${node.id}`} key={i}>
