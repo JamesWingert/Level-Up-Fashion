@@ -5,7 +5,7 @@ import Header from './Header';
 const Layout = ({ children }) => {
   return (
     <div>
-      <Header /> {children}
+      <Header /> <div className="h-screen bg-base-100">{children}</div>
     </div>
   );
 };
