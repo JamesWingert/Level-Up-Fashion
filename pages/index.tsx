@@ -73,7 +73,7 @@ function Home() {
   const { endCursor, hasNextPage } = data?.posts.pageInfo;
 
   return (
-    <div>
+    <div className="h-screen bg-base-100">
       <Head>
         <title>Level Up Fashion</title>
         <link rel="icon" href="/favicon.ico" />

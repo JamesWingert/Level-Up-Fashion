@@ -84,7 +84,7 @@ const Post = () => {
         Create a new post
       </h1>
       <form
-        className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg"
+        className="grid grid-cols-1 gap-y-6 p-8 rounded-lg shadow-lg bg-base-content"
         onSubmit={handleSubmit(onSubmit)}
       >
         <label className="block">
