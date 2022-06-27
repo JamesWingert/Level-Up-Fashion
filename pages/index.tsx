@@ -78,7 +78,7 @@ function Home() {
         <title>Level Up Fashion</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container  py-20 px-5 mx-auto max-w-7xl">
+      <div className="container  px-5 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {data?.posts.edges.map(({ node }, i) => (
             // <Link href={`/post/${node.id}`} key={i}>
