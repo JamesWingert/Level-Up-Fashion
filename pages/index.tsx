@@ -32,7 +32,7 @@ function Home() {
   const { user } = useUser();
 
   const { data, loading, error, fetchMore } = useQuery(AllPostsQuery, {
-    variables: { first: 3 },
+    variables: { first: 6 },
   });
 
   if (!user) {
@@ -73,7 +73,7 @@ function Home() {
   const { endCursor, hasNextPage } = data?.posts.pageInfo;
 
   return (
-    <div className="container mx-auto h-auto bg-base-100">
+    <div className="container mx-auto h-screen bg-base-100">
       <Head>
         <title>Level Up Fashion</title>
         <link rel="icon" href="/favicon.ico" />

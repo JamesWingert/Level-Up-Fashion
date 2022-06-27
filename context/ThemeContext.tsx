@@ -37,7 +37,10 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={{ themeMode, toggleTheme }}>
-      <Theme dataTheme={themeMode === 'dracula' ? 'dracula' : 'pastel'}>
+      <Theme
+        className="h-screen bg-base-100"
+        dataTheme={themeMode === 'dracula' ? 'dracula' : 'pastel'}
+      >
         {children}
       </Theme>
     </ThemeContext.Provider>
