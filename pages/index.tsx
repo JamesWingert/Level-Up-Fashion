@@ -67,7 +67,7 @@ function Home() {
       </div>
     );
   }
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="h-screen bg-base-100">Loading...</p>;
   if (error) return <p>Oh no... {error.message}</p>;
 
   const { endCursor, hasNextPage } = data?.posts.pageInfo;
