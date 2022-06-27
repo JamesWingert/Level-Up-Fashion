@@ -78,41 +78,42 @@ function Home() {
         <title>Level Up Fashion</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-full bg-base-100"></div>
-      <div className="py-20 px-5 max-w-7xl ">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {data?.posts.edges.map(({ node }, i) => (
-            // <Link href={`/post/${node.id}`} key={i}>
-            <div className="hover:cursor-pointer" key={i}>
-              <Card
-                href={node.id}
-                title={node.title}
-                category={node.category}
-                url={node.url}
-                id={node.id}
-                description={node.description}
-                imageUrl={node.imageUrl}
-              />
-            </div>
-            // </Link>
-          ))}
+      <div className="w-full h-full bg-base-100">
+        <div className="py-20 px-5 max-w-7xl ">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {data?.posts.edges.map(({ node }, i) => (
+              // <Link href={`/post/${node.id}`} key={i}>
+              <div className="hover:cursor-pointer" key={i}>
+                <Card
+                  href={node.id}
+                  title={node.title}
+                  category={node.category}
+                  url={node.url}
+                  id={node.id}
+                  description={node.description}
+                  imageUrl={node.imageUrl}
+                />
+              </div>
+              // </Link>
+            ))}
+          </div>
+          {hasNextPage ? (
+            <button
+              className="py-2 px-4 my-10 text-white rounded bg-primary hover:bg-primary-focus"
+              onClick={() => {
+                fetchMore({
+                  variables: { after: endCursor },
+                });
+              }}
+            >
+              more
+            </button>
+          ) : (
+            <p className="my-10 font-medium text-center">
+              You&apos;ve reached the end!
+            </p>
+          )}
         </div>
-        {hasNextPage ? (
-          <button
-            className="py-2 px-4 my-10 text-white rounded bg-primary hover:bg-primary-focus"
-            onClick={() => {
-              fetchMore({
-                variables: { after: endCursor },
-              });
-            }}
-          >
-            more
-          </button>
-        ) : (
-          <p className="my-10 font-medium text-center">
-            You&apos;ve reached the end!
-          </p>
-        )}
       </div>
     </div>
   );
