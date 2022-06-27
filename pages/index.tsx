@@ -73,12 +73,12 @@ function Home() {
   const { endCursor, hasNextPage } = data?.posts.pageInfo;
 
   return (
-    <div className="container mx-auto h-screen bg-base-100">
+    <div className="container py-6  mx-auto ">
       <Head>
         <title>Level Up Fashion</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-full bg-base-100">
+      <div className="rounded-xl shadow-sm bg-base-300 shadow-base-content">
         <div className="py-20 px-5 max-w-7xl ">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {data?.posts.edges.map(({ node }, i) => (
