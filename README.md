@@ -1,5 +1,8 @@
 https://level-up-fashion.vercel.app
 
+username:test@test.test
+password:Test123!
+
 This is a community blog for people in the tech industry to come and post fashion ideas. This is a serverless application built using:
 
 - NextJS
